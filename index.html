@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pulse Bomb - أنمي فخم</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: #0e0e0e;
+      color: #eee;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: #1b1b1b;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #ff3f3f;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header h1 {
+      color: #ff3f3f;
+      font-weight: 900;
+      font-size: 28px;
+      letter-spacing: 2px;
+      cursor: default;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+    nav a {
+      color: #eee;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+    nav a:hover {
+      background: #ff3f3f;
+      color: #fff;
+    }
+    .search-box {
+      margin-left: 30px;
+      flex-grow: 1;
+      max-width: 400px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 8px 15px;
+      border-radius: 30px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+      transition: box-shadow 0.3s ease;
+    }
+    .search-box input:focus {
+      box-shadow: 0 0 10px #ff3f3f;
+    }
+    main {
+      flex-grow: 1;
+      padding: 30px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-header {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      border-bottom: 3px solid #ff3f3f;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .categories {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .category {
+      background: #1f1f1f;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 14px;
+      color: #bbb;
+      cursor: default;
+      user-select: none;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .category.active, .category:hover {
+      background: #ff3f3f;
+      color: #fff;
+    }
+    .anime-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+      gap: 25px;
+    }
+    .anime-card {
+      background: #1b1b1b;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(255,63,63,0.4);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .anime-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff3f3f;
+    }
+    .anime-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .anime-info {
+      padding: 15px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .anime-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ff3f3f;
+      margin-bottom: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .anime-desc {
+      font-size: 14px;
+      color: #ccc;
+      flex-grow: 1;
+      margin-bottom: 10px;
+    }
+    .anime-rating {
+      font-weight: 700;
+      font-size: 14px;
+      color: #ffd700;
+    }
+    footer {
+      background: #1b1b1b;
+      color: #555;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 14px;
+      margin-top: auto;
+      user-select: none;
+    }
+    @media (max-width: 600px) {
+      header {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .search-box {
+        max-width: 100%;
+        margin-left: 0;
+        order: 3;
+        width: 100%;
+      }
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        order: 2;
+        width: 100%;
+      }
+      .anime-card img {
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pulse Bomb</h1>
+    <nav>
+      <a href="#">بحث</a>
+      <a href="#">تصنيفات</a>
+      <a href="#">مسلسلات</a>
+      <a href="#">أفلام</a>
+    </nav>
+    <div class="search-box">
+      <input type="text" placeholder="ابحث عن أنمي..." />
+    </div>
+  </header>
+  <main>
+    <section>
+      <h2 class="section-header">التصنيفات - قريبا</h2>
+      <div class="categories">
+        <div class="category active">قريباً</div>
+        <div class="category">قريباً</div>
+        <div class="category">قريباً</div>
+        <div class="category">قريباً</div>
+        <div class="category">قريباً</div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-header">مسلسلات - قريبا</h2>
+      <div class="anime-grid">
+        <div class="anime-card">
+          <img src="https://i.postimg.cc/6q5zBLKD/image.jpg" alt="Anime 1" />
+          <div class="anime-info">
+            <div class="anime-title">اسم الأنمي 1</div>
+            <div class="anime-desc">وصف مختصر قريبا...</div>
+            <div class="anime-rating">⭐ 9.0</div>
+          </div>
+        </div>
+        <div class="anime-card">
+          <img src="https://i.postimg.cc/6q5zBLKD/image.jpg" alt="Anime 2" />
+          <div class="anime-info">
+            <div class="anime-title">اسم الأنمي 2</div>
+            <div class="anime-desc">وصف مختصر قريبا...</div>
+            <div class="anime-rating">⭐ 8.7</div>
+          </div>
+        </div>
+        <div class="anime-card">
+          <img src="https://i.postimg.cc/6q5zBLKD/image.jpg" alt="Anime 3" />
+          <div class="anime-info">
+            <div class="anime-title">اسم الأنمي 3</div>
+            <div class="anime-desc">وصف مختصر قريبا...</div>
+            <div class="anime-rating">⭐ 9.3</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-header">أفلام - قريبا</h2>
+      <div class="anime-grid">
+        <div class="anime-card">
+          <img src="https://i.postimg.cc/6q5zBLKD/image.jpg" alt="Movie 1" />
+          <div class="anime-info">
+            <div class="anime-title">اسم الفيلم 1</div>
+            <div class="anime-desc">وصف مختصر قريبا...</div>
+            <div class="anime-rating">⭐ 8.5</div>
+          </div>
+        </div>
+        <div class="anime-card">
+          <img src="https://i.postimg.cc/6q5zBLKD/image.jpg" alt="Movie 2" />
+          <div class="anime-info">
+            <div class="anime-title">اسم الفيلم 2</div>
+            <div class="anime-desc">وصف مختصر قريبا...</div>
+            <div class="anime-rating">⭐ 8.9</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    جميع الحقوق محفوظة &copy; 2025 Pulse Bomb
+  </footer>
+</body>
+</html>
