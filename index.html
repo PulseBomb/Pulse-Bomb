@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pulse Bomb - أنمي</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #ff0055;
+      padding: 20px;
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    #searchBox {
+      display: block;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 400px;
+      padding: 10px 15px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1em;
+      outline: none;
+      box-shadow: 0 0 10px #ff0055;
+      background-color: #222;
+      color: #eee;
+    }
+    .anime-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .anime-card {
+      background-color: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px #ff0055;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .anime-card:hover {
+      transform: scale(1.05);
+    }
+    .anime-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+    .anime-info {
+      padding: 15px;
+    }
+    .anime-title {
+      font-size: 1.2em;
+      margin: 0 0 10px;
+      font-weight: bold;
+    }
+    .anime-genre {
+      font-size: 0.9em;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>Pulse Bomb</header>
+
+  <input type="text" id="searchBox" placeholder="ابحث عن أنمي..." />
+
+  <section class="anime-list" id="animeList">
+    <article class="anime-card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/2/24/Attack_on_Titan_S2_key_visual.jpg" alt="Attack on Titan" />
+      <div class="anime-info">
+        <h3 class="anime-title">Attack on Titan</h3>
+        <p class="anime-genre">دراما، أكشن، خيال</p>
+      </div>
+    </article>
+
+    <article class="anime-card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/0/0b/Jujutsu_Kaisen_Anime_Key_Visual.jpg" alt="Jujutsu Kaisen" />
+      <div class="anime-info">
+        <h3 class="anime-title">Jujutsu Kaisen</h3>
+        <p class="anime-genre">إثارة، أكشن، خارق للطبيعة</p>
+      </div>
+    </article>
+
+    <article class="anime-card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/6/65/One_Piece_Logo.svg" alt="One Piece" />
+      <div class="anime-info">
+        <h3 class="anime-title">One Piece</h3>
+        <p class="anime-genre">مغامرات، أكشن، كوميديا</p>
+      </div>
+    </article>
+
+    <article class="anime-card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Bleach_Anime_Key_Visual.jpg" alt="Bleach" />
+      <div class="anime-info">
+        <h3 class="anime-title">Bleach</h3>
+        <p class="anime-genre">أكشن، خارق للطبيعة، مغامرات</p>
+      </div>
+    </article>
+
+    <article class="anime-card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/a/a6/Demon_Slayer_Key_Visual.jpg" alt="Demon Slayer" />
+      <div class="anime-info">
+        <h3 class="anime-title">Demon Slayer</h3>
+        <p class="anime-genre">أكشن، دراما، خيال</p>
+      </div>
+    </article>
+
+    <article class="anime-card">
+      <img src="https://upload.wikimedia.org/wikipedia/en/9/94/Naruto_Uzumaki.png" alt="Naruto" />
+      <div class="anime-info">
+        <h3 class="anime-title">Naruto</h3>
+        <p class="anime-genre">أكشن، مغامرات، فنون قتالية</p>
+      </div>
+    </article>
+  </section>
+
+  <script>
+    const searchBox = document.getElementById('searchBox');
+    const animeList = document.getElementById('animeList');
+    const cards = animeList.getElementsByClassName('anime-card');
+
+    searchBox.addEventListener('input', function() {
+      const filter = searchBox.value.toLowerCase();
+      for (let card of cards) {
+        const title = card.querySelector('.anime-title').textContent.toLowerCase();
+        if (title.includes(filter)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
