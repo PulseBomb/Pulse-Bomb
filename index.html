@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pulse Bomb - موقع أنمي</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: #121212;
+      color: #eee;
+      direction: rtl;
+    }
+    header {
+      background: #ff3b3f;
+      padding: 20px 30px;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      box-shadow: 0 2px 6px rgba(255,59,63,0.6);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+    .search-bar {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .search-bar input[type="search"] {
+      width: 90%;
+      max-width: 500px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      outline: none;
+      box-shadow: 0 0 10px #ff3b3f66;
+      background: #222;
+      color: #eee;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      background: #ff3b3f;
+      color: #fff;
+      padding: 10px 25px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    nav a:hover {
+      background: #d23033;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      border-bottom: 3px solid #ff3b3f;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .anime-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+      gap: 25px;
+    }
+    .anime-item {
+      background: #1e1e1e;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 15px #ff3b3f66;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .anime-item:hover {
+      transform: scale(1.05);
+    }
+    .anime-item img {
+      width: 100%;
+      display: block;
+      height: 250px;
+      object-fit: cover;
+    }
+    .anime-item h3 {
+      margin: 12px;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 0.9rem;
+      color: #777;
+      border-top: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+
+<header>Pulse Bomb</header>
+
+<div class="container">
+
+  <div class="search-bar">
+    <input type="search" placeholder="ابحث عن الأنمي..." />
+  </div>
+
+  <nav>
+    <a href="#">التصنيفات (قريباً)</a>
+    <a href="#">مسلسلات (قريباً)</a>
+    <a href="#">أفلام (قريباً)</a>
+  </nav>
+
+  <section>
+    <h2 class="section-title">أحدث الأنميات</h2>
+    <div class="anime-list">
+
+      <div class="anime-item">
+        <img src="https://i.postimg.cc/6q5zBLKD/image.jpg" alt="Bleach Arc 1" />
+        <h3>بليتش - القوس الأول</h3>
+      </div>
+
+      <div class="anime-item">
+        <img src="https://upload.wikimedia.org/wikipedia/en/5/55/Attack_on_Titan_Season_1_DVD.jpg" alt="Attack on Titan" />
+        <h3>هجوم العمالقة</h3>
+      </div>
+
+      <div class="anime-item">
+        <img src="https://upload.wikimedia.org/wikipedia/en/4/4f/NarutoCoverTankobon1.jpg" alt="Naruto" />
+        <h3>ناروتو</h3>
+      </div>
+
+      <div class="anime-item">
+        <img src="https://upload.wikimedia.org/wikipedia/en/7/70/One_Piece_Logo.svg" alt="One Piece" />
+        <h3>ون بيس</h3>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  &copy; 2025 Pulse Bomb. كل الحقوق محفوظة.
+</footer>
+
+</body>
+</html>
