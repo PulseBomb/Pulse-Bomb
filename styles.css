@@ -12,10 +12,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-
-  width: 1200px;
-  min-width: 1200px;
-  overflow-x: auto;
+  width: 1200px;        /* ثابت 1200 */
+  min-width: 1200px;    /* لا يقل عن 1200 */
+  overflow-x: auto;     /* ظهور شريط التمرير الأفقي لو الشاشة أصغر */
 }
 
 header {
@@ -77,9 +76,7 @@ main {
   padding: 0 20px 40px 20px;
   max-width: 1200px;
   margin: 0 auto;
-  width: 1200px;
-  min-width: 1200px;
-  overflow-x: auto;
+  width: 100%;
 }
 
 section {
@@ -121,15 +118,4 @@ footer {
   font-size: 0.9rem;
 }
 
-/* نلغي التغييرات الخاصة بالموبايل عشان نحتفظ بالشكل الديسكتوب */
-@media (max-width: 600px) {
-  nav a {
-    margin-right: 25px !important;
-    font-size: 1rem !important;
-  }
-  .banner-text {
-    font-size: 2.5rem !important;
-    left: 30px !important;
-    bottom: 20px !important;
-  }
-}
+/* حتى لو الشاشة أصغر، التصميم مش هيتغير */
