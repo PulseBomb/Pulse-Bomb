@@ -12,6 +12,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  width: 1200px;
+  min-width: 1200px;
+  overflow-x: auto;
 }
 
 header {
@@ -73,7 +77,9 @@ main {
   padding: 0 20px 40px 20px;
   max-width: 1200px;
   margin: 0 auto;
-  width: 100%;
+  width: 1200px;
+  min-width: 1200px;
+  overflow-x: auto;
 }
 
 section {
@@ -115,24 +121,15 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Responsive */
+/* نلغي التغييرات الخاصة بالموبايل عشان نحتفظ بالشكل الديسكتوب */
 @media (max-width: 600px) {
   nav a {
-    margin-right: 15px;
-    font-size: 0.9rem;
+    margin-right: 25px !important;
+    font-size: 1rem !important;
   }
   .banner-text {
-    font-size: 1.6rem;
-    left: 15px;
-    bottom: 15px;
-  }
-  main {
-    padding: 0 10px 20px 10px;
-  }
-  article {
-    padding: 10px 15px;
-  }
-  section h2 {
-    font-size: 1.4rem;
+    font-size: 2.5rem !important;
+    left: 30px !important;
+    bottom: 20px !important;
   }
 }
