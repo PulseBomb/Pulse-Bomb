@@ -199,9 +199,17 @@
 
   <footer>
     &copy; 2025 Pulse Bomb. All rights reserved.
-  <<script src="https://cdn.counter.dev/script.js"
-        data-id="3cbd30b1-895a-4d6b-9435-a86a40e01821"
-        data-utcoffset="3"></script>footer>
-  
+
+    <div id="view-counter" style="color:white; text-align: center; padding: 20px 0; font-size: 18px; font-family: sans-serif;">
+  Loading views...
+</div>
+
+<script>
+  fetch('https://api.countapi.xyz/hit/pulsebomb.github.io/visits')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('view-counter').innerText = `Total Views: ${data.value}`;
+    });
+</script>
 </body>
 </html>
