@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://pulsebomb.github.io/Pulse-Bomb/</loc>
+    <loc>https://pulsebomb.github.io/Pulse-Bomb/index.html</loc>
   </url>
   <url>
     <loc>https://pulsebomb.github.io/Pulse-Bomb/anime.html</loc>
@@ -10,7 +10,6 @@
     <loc>https://pulsebomb.github.io/Pulse-Bomb/games.html</loc>
   </url>
   <url>
-    <loc>https://pulsebomb.github.io/Pulse-Bomb/news.html</loc>
+    <loc>https://pulsebomb.github.io/Pulse-Bomb/comingsoon.html</loc>
   </url>
-  <!-- زوّد كل صفحات موقعك هنا -->
 </urlset>
