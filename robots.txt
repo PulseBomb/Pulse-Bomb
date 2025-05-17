@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pulsebomb.github.io/Pulse-Bomb/sitemap.xml
