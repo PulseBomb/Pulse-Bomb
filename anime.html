@@ -113,7 +113,7 @@
     const reactions = document.querySelectorAll('.reaction img');
     reactions.forEach(imgElement => {
       const postId = imgElement.parentElement.getAttribute('data-id');
-      const count = parseInt(localStorage.getItem(`count-${postId}`)) || 0;
+      const count = parseInt(localStorage.getItem(`count-${postId}`)) || 23;
       const defaultSrc = imgElement.getAttribute('data-default');
       const activeSrc = imgElement.getAttribute('data-active');
 
