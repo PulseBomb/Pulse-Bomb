@@ -214,46 +214,49 @@
   <footer>
     &copy; 2025 Pulse Bomb. All rights reserved.
   </footer> 
-function handleReaction(imgElement, postId) {
-  const countSpan = document.getElementById(`count-${postId}`);
+<script>
+  // هنا تحط الكود كله اللي كتبتَه
+  function handleReaction(imgElement, postId) {
+    const countSpan = document.getElementById(`count-${postId}`);
 
-  // نجيب العدد الحالي من localStorage أو 100 لو مش موجود
-  let count = parseInt(localStorage.getItem(`count-${postId}`)) || 100;
+    // نجيب العدد الحالي من localStorage أو 100 لو مش موجود
+    let count = parseInt(localStorage.getItem(`count-${postId}`)) || 100;
 
-  const defaultSrc = imgElement.getAttribute('data-default');
-  const activeSrc = imgElement.getAttribute('data-active');
-
-  // لو الصورة حالياً في الوضع الافتراضي (يعني مش مضغوط)
-  if (imgElement.src.endsWith(defaultSrc.split('/').pop())) {
-    imgElement.src = activeSrc;
-    count++;
-  } else {
-    imgElement.src = defaultSrc;
-    count = Math.max(count - 1, 100); // العدد لا يقل عن 100
-  }
-
-  countSpan.textContent = count;
-  localStorage.setItem(`count-${postId}`, count);
-}
-
-// لما الصفحة تحمل، نجيب العدد من localStorage أو نبدأ بـ 100
-window.onload = () => {
-  const reactions = document.querySelectorAll('.reaction img');
-  reactions.forEach(imgElement => {
-    const postId = imgElement.parentElement.getAttribute('data-id');
-    const count = parseInt(localStorage.getItem(`count-${postId}`)) || 100;
     const defaultSrc = imgElement.getAttribute('data-default');
     const activeSrc = imgElement.getAttribute('data-active');
 
-    document.getElementById(`count-${postId}`).textContent = count;
-
-    if (count > 100) {
+    // لو الصورة حالياً في الوضع الافتراضي (يعني مش مضغوط)
+    if (imgElement.src.endsWith(defaultSrc.split('/').pop())) {
       imgElement.src = activeSrc;
+      count++;
     } else {
       imgElement.src = defaultSrc;
+      count = Math.max(count - 1, 100); // العدد لا يقل عن 100
     }
-  });
-};
+
+    countSpan.textContent = count;
+    localStorage.setItem(`count-${postId}`, count);
+  }
+
+  // لما الصفحة تحمل، نجيب العدد من localStorage أو نبدأ بـ 100
+  window.onload = () => {
+    const reactions = document.querySelectorAll('.reaction img');
+    reactions.forEach(imgElement => {
+      const postId = imgElement.parentElement.getAttribute('data-id');
+      const count = parseInt(localStorage.getItem(`count-${postId}`)) || 100;
+      const defaultSrc = imgElement.getAttribute('data-default');
+      const activeSrc = imgElement.getAttribute('data-active');
+
+      document.getElementById(`count-${postId}`).textContent = count;
+
+      if (count > 100) {
+        imgElement.src = activeSrc;
+      } else {
+        imgElement.src = defaultSrc;
+      }
+    });
+  };
+
 </script>
     </body>
     
