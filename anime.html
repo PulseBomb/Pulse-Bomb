@@ -88,46 +88,7 @@
   <footer>
     &copy; 2025 Pulse Bomb. All rights reserved.
   </footer>
-<script>
-  function handleReaction(imgElement, postId) {
-    const countSpan = document.getElementById(`count-${postId}`);
-    let count = parseInt(localStorage.getItem(`count-${postId}`)) || 0;
-
-    const defaultSrc = imgElement.getAttribute('data-default');
-    const activeSrc = imgElement.getAttribute('data-active');
-
-    if (imgElement.src.endsWith(defaultSrc.split('/').pop())) {
-      imgElement.src = activeSrc;
-      count++;
-    } else {
-      imgElement.src = defaultSrc;
-      count = Math.max(count - 1, 0);
-    }
-
-    countSpan.textContent = count;
-    localStorage.setItem(`count-${postId}`, count);
-  }
-
-  // لما الصفحة تحمل، نجيب الحالة من LocalStorage
-  window.onload = () => {
-    const reactions = document.querySelectorAll('.reaction img');
-    reactions.forEach(imgElement => {
-      const postId = imgElement.parentElement.getAttribute('data-id');
-      const count = parseInt(localStorage.getItem(`count-${postId}`)) || 23;
-      const defaultSrc = imgElement.getAttribute('data-default');
-      const activeSrc = imgElement.getAttribute('data-active');
-
-      document.getElementById(`count-${postId}`).textContent = count;
-
-      // لو العدد أكبر من صفر، نخلي الزر بالوضع النشط
-      if (count > 0) {
-        imgElement.src = activeSrc;
-      } else {
-        imgElement.src = defaultSrc;
-      }
-    });
-  };
-</script>
+<script src="reactions.js"></script>
 </body>
 
 </html>
