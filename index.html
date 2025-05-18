@@ -174,7 +174,28 @@
     <p>A world without Genshin Impact might be quieter, simpler — but it would also be far less magical.</p>
 
     <p style="color:#aaa; font-style:italic;">Written by unknown person</p>
+  <article class="post">
+
+  <!-- عداد المشاهدات -->
+  <div style="font-size: 18px; display: flex; align-items: center; gap: 8px; margin-top: 10px;">
+    <img src="https://i.postimg.cc/0NfR7Rzv/1000012782-removebg-preview.png" alt="eye icon" style="width: 30px; height: 30px;" />
+    <span>Views: </span>
+    <span id="count-post1">Loading...</span>
   </div>
+</article>
+
+<script>
+  fetch('https://abacus.jasoncameron.dev/hit/pulsebomb/homepage')  // لو تقدر تخصص رابط لكل منشور غير الـ homepage
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('count-post1').innerText = data.value;
+    })
+    .catch(err => {
+      document.getElementById('count-post1').innerText = "Failed to load";
+      console.error(err);
+    });
+</script>
+  
 
   <button id="toggleBtn" onclick="toggleArticle()" style="background-color:#66ccff; color:#121212; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; margin-top: 10px;">Read More</button>
 </div>
