@@ -215,37 +215,46 @@
   <footer>
     &copy; 2025 Pulse Bomb. All rights reserved.
   </footer> 
-      function handleReaction(img, postId) {
-  if (localStorage.getItem(postId)) return; // منع الضغط مرتين
-
-  // زيادة العداد عن طريق countapi
-  fetch(`https://api.countapi.xyz/hit/pulsebomb/${postId}`)
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById(`count-${postId}`).innerText = data.value;
-      img.src = img.dataset.active; // غير الصورة للصورة النشطة (مثلاً لون أحمر)
-      localStorage.setItem(postId, true); // سجل إنه ضغط على الزر
-    });
-}
-
-// تحميل عدد الإعجابات عند تحميل الصفحة
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".reaction").forEach(div => {
-    const postId = div.dataset.id;
+<script>
+  function handleReaction(imgElement, postId) {
     const countSpan = document.getElementById(`count-${postId}`);
-    const img = div.querySelector("img");
+    let count = parseInt(localStorage.getItem(`count-${postId}`)) || 0;
 
-    fetch(`https://api.countapi.xyz/get/pulsebomb/${postId}`)
-      .then(response => response.json())
-      .then(data => {
-        countSpan.innerText = data.value || 0;
+    const defaultSrc = imgElement.getAttribute('data-default');
+    const activeSrc = imgElement.getAttribute('data-active');
 
-        if (localStorage.getItem(postId)) {
-          img.src = img.dataset.active;
-        }
-      });
-  });
-});
+    if (imgElement.src.endsWith(defaultSrc.split('/').pop())) {
+      imgElement.src = activeSrc;
+      count++;
+    } else {
+      imgElement.src = defaultSrc;
+      count = Math.max(count - 1, 0);
+    }
+
+    countSpan.textContent = count;
+    localStorage.setItem(`count-${postId}`, count);
+  }
+
+  // لما الصفحة تحمل، نجيب الحالة من LocalStorage
+  window.onload = () => {
+    const reactions = document.querySelectorAll('.reaction img');
+    reactions.forEach(imgElement => {
+      const postId = imgElement.parentElement.getAttribute('data-id');
+      const count = parseInt(localStorage.getItem(`count-${postId}`)) || 0;
+      const defaultSrc = imgElement.getAttribute('data-default');
+      const activeSrc = imgElement.getAttribute('data-active');
+
+      document.getElementById(`count-${postId}`).textContent = count;
+
+      // لو العدد أكبر من صفر، نخلي الزر بالوضع النشط
+      if (count > 0) {
+        imgElement.src = activeSrc;
+      } else {
+        imgElement.src = defaultSrc;
+      }
+    });
+  };
+</script>
     </body>
     
 </html>
