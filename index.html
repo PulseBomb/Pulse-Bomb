@@ -268,27 +268,28 @@
   
   
    
-       &copy; 2025 Pulse Bomb. All rights reserved.
-
+       <footer style="width: 100%; text-align: center; padding: 10px 0; position: fixed; bottom: 0; background: #222; color: #fff;">
+  &copy; 2025 Pulse Bomb. All rights reserved.
+       </footer>
+  
+<div id="view-count" style="font-size: 24px; display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px;">
+  <img src="https://i.postimg.cc/kMxRCrmF/1000012773-removebg-preview.png" alt="eye emoji" style="width: 40px; height: 40px;" />
+  <span>Views: </span>
+  <span id="count">Loading...</span>
+</div>
 
 <script>
-  <div id="view-count" style="font-size: 20px; display: flex; justify-content: center; align-items: center; margin-top: 20px;">
-  <span>Views: </span>
-  <span id="count">Loading...</span> <img src="https://i.postimg.cc/kMxRCrmF/1000012773-removebg-preview.png" alt="emoji" style="width: 40px; height: 40px; vertical-align: middle;" />
-</div>
-  <script>
-  
-
   fetch('https://abacus.jasoncameron.dev/hit/pulsebomb/homepage')
     .then(res => res.json())
     .then(data => {
-      document.getElementById('view-count').innerText = `Views: ${data.value}`;
+      document.getElementById('count').innerText = data.value;
     })
     .catch(err => {
-      document.getElementById('view-count').innerText = "Failed to load view count";
+      document.getElementById('count').innerText = "Failed to load";
       console.error(err);
     });
 </script>
+
       </div>
 </script>
 </body>
