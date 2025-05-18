@@ -61,27 +61,31 @@
   <h2 style="display:flex; align-items:center; gap:10px; font-size:22px; justify-content: space-between;">
     <span style="display:flex; align-items:center; gap:10px;">
       <img src="https://i.postimg.cc/0j180Dvt/cud48-icon.png" alt="emoji" style="width:28px; height:28px;">
-      FBI Uses Gamer Data to Identify Psychopaths? Myth Debunked
+      Wuthering Waves or Waifu Waves? Players React to Sexy New Characters!
     </span>
 
-    <!-- Reaction Button next to title -->
-    <div style="display:flex; align-items:center; gap:8px; cursor:pointer;" onclick="handleReaction(this, 'fbi-news')">
+    <!-- Reaction Button with emoji image and count -->
+    <div style="display:flex; align-items:center; gap:8px; cursor:pointer;" onclick="handleReaction(this, 'wuthering-news')">
       <img
-        src="https://i.postimg.cc/q7sXHMFy/7074-Fbi-chan.png"
-        data-default="https://i.postimg.cc/q7sXHMFy/7074-Fbi-chan.png"
-        data-active="https://i.postimg.cc/q7sXHMFy/7074-Fbi-chan.png"
+        src="https://i.postimg.cc/0j180Dvt/cud48-icon.png"
+        data-default="https://i.postimg.cc/0j180Dvt/cud48-icon.png"
+        data-active="https://i.postimg.cc/XJDxn0v2/1000012790-removebg-preview.png"
         alt="reaction emoji"
         style="width:28px; height:28px;"
       />
-      <span id="count-fbi-news" style="color:#ccc; font-weight:bold;">100</span>
+      <span id="count-wuthering-news" style="color:#ccc; font-weight:bold;">100</span>
     </div>
   </h2>
 
-  <img src="https://i.postimg.cc/ryJntgQx/images-44.jpg" alt="FBI News" style="width:100%; border-radius:12px; margin:15px 0;">
+  <img src="https://i.postimg.cc/pLLPC2Nt/IMG-20250518-193746.jpg" alt="Wuthering Waves" style="width:100%; border-radius:12px; margin:15px 0;">
 
   <p style="font-size:15px; line-height:1.6;">
-    A rumor has been spreading that the FBI uses gamer data to identify potential psychopaths based on interactions with NPCs.  
-    However, NBC News has confirmed this is false and the circulating image is fabricated.
+    The latest update in Wuthering Waves has sparked some… <i>visual appreciation</i> among players.  
+    With each new character reveal, the game seems to be slowly shifting from action-RPG to a waifu showcase.  
+    <br><br>
+    “Am I playing or just watching an anime fashion show?” one player joked on Discord.  
+    <br><br>
+    While developers haven’t commented, fans are now more excited about outfits than actual combat mechanics!
   </p>
 
 </div>
@@ -109,15 +113,17 @@
   }
 
   window.onload = () => {
-    const reactionContainers = document.querySelectorAll('h2 > div');
-    reactionContainers.forEach(container => {
-      const postId = container.getAttribute('onclick').match(/'([^']+)'/)[1];
-      const count = parseInt(localStorage.getItem(`count-${postId}`)) || 43;
-      const imgElement = container.querySelector('img');
+    const reactionContainers = document.querySelectorAll('div[onclick^="handleReaction"]');
+    reactionContainers.forEach(element => {
+      const postId = element.getAttribute('onclick').match(/'([^']+)'/)[1];
+      const count = parseInt(localStorage.getItem(`count-${postId}`)) || 100;
+
+      const imgElement = element.querySelector('img');
       const defaultSrc = imgElement.getAttribute('data-default');
       const activeSrc = imgElement.getAttribute('data-active');
 
-      document.getElementById(`count-${postId}`).textContent = count;
+      const countSpan = document.getElementById(`count-${postId}`);
+      countSpan.textContent = count;
 
       if (count > 100) {
         imgElement.src = activeSrc;
