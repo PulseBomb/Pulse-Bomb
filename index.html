@@ -264,7 +264,29 @@
     </section>
   </main>
 
+  <body>
+  <!-- حاجات الصفحة -->
   
+  <div id="view-count" style="font-size: 24px; display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px;">
+    <img src="https://i.postimg.cc/kMxRCrmF/1000012773-removebg-preview.png" alt="eye emoji" style="width: 40px; height: 40px;" />
+    <span>Views: </span>
+    <span id="count">Loading...</span>
+  </div>
+
+  <script>
+    fetch('https://abacus.jasoncameron.dev/hit/pulsebomb/homepage')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('count').innerText = data.value;
+      })
+      .catch(err => {
+        document.getElementById('count').innerText = "Failed to load";
+        console.error(err);
+      });
+  </script>
+
+  <!-- حاجات الصفحة -->
+  </body>
   
   
    
