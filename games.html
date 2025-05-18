@@ -58,23 +58,9 @@
   <main>
 <div style="background:#1a1a1a; color:#fff; padding:20px; border-radius:16px; max-width:650px; font-family:sans-serif; box-shadow:0 0 20px rgba(255,255,255,0.05); margin:auto;">
 
-  <h2 style="display:flex; align-items:center; gap:10px; font-size:22px; justify-content: space-between;">
-    <span style="display:flex; align-items:center; gap:10px;">
-      <img src="https://i.postimg.cc/0j180Dvt/cud48-icon.png" alt="emoji" style="width:28px; height:28px;">
-      Wuthering Waves or Waifu Waves? Players React to Sexy New Characters!
-    </span>
-
-    <!-- Reaction Button with emoji image and count -->
-    <div style="display:flex; align-items:center; gap:8px; cursor:pointer;" onclick="handleReaction(this, 'wuthering-news')">
-      <img
-        src="https://i.postimg.cc/0j180Dvt/cud48-icon.png"
-        data-default="https://i.postimg.cc/0j180Dvt/cud48-icon.png"
-        data-active="https://i.postimg.cc/XJDxn0v2/1000012790-removebg-preview.png"
-        alt="reaction emoji"
-        style="width:28px; height:28px;"
-      />
-      <span id="count-wuthering-news" style="color:#ccc; font-weight:bold;">100</span>
-    </div>
+  <h2 style="display:flex; align-items:center; gap:10px; font-size:22px;">
+    <img src="https://i.postimg.cc/0j180Dvt/cud48-icon.png" alt="emoji" style="width:40px; height:40px;">
+    Wuthering Waves or Waifu Waves? Players React to Sexy New Characters!
   </h2>
 
   <img src="https://i.postimg.cc/pLLPC2Nt/IMG-20250518-193746.jpg" alt="Wuthering Waves" style="width:100%; border-radius:12px; margin:15px 0;">
@@ -90,49 +76,6 @@
 
 </div>
 
-<script>
-  function handleReaction(element, postId) {
-    const countSpan = document.getElementById(`count-${postId}`);
-
-    let count = parseInt(localStorage.getItem(`count-${postId}`)) || 100;
-
-    const imgElement = element.querySelector('img');
-    const defaultSrc = imgElement.getAttribute('data-default');
-    const activeSrc = imgElement.getAttribute('data-active');
-
-    if (imgElement.src.endsWith(defaultSrc.split('/').pop())) {
-      imgElement.src = activeSrc;
-      count++;
-    } else {
-      imgElement.src = defaultSrc;
-      count = Math.max(count - 1, 100);
-    }
-
-    countSpan.textContent = count;
-    localStorage.setItem(`count-${postId}`, count);
-  }
-
-  window.onload = () => {
-    const reactionContainers = document.querySelectorAll('div[onclick^="handleReaction"]');
-    reactionContainers.forEach(element => {
-      const postId = element.getAttribute('onclick').match(/'([^']+)'/)[1];
-      const count = parseInt(localStorage.getItem(`count-${postId}`)) || 100;
-
-      const imgElement = element.querySelector('img');
-      const defaultSrc = imgElement.getAttribute('data-default');
-      const activeSrc = imgElement.getAttribute('data-active');
-
-      const countSpan = document.getElementById(`count-${postId}`);
-      countSpan.textContent = count;
-
-      if (count > 100) {
-        imgElement.src = activeSrc;
-      } else {
-        imgElement.src = defaultSrc;
-      }
-    });
-  };
-</script>
 <section class="news-section" style="padding: 20px; background-color: #111; color: white; border-radius: 10px; margin: 20px;">
   <h2 style="display: flex; align-items: center; font-size: 22px;">
     <img src="https://i.postimg.cc/q7sXHMFy/7074-Fbi-chan.png" alt="emoji" style="width: 40px; margin-right: 40px;">
