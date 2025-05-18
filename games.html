@@ -56,57 +56,77 @@
   </div>
 
   <main>
-    <div style="background:#1a1a1a; color:#fff; padding:20px; border-radius:16px; max-width:650px; font-family:sans-serif; box-shadow:0 0 20px rgba(255,255,255,0.05); margin:auto;">
+<div style="background:#1a1a1a; color:#fff; padding:20px; border-radius:16px; max-width:650px; font-family:sans-serif; box-shadow:0 0 20px rgba(255,255,255,0.05); margin:auto;">
 
-  <h2 style="display:flex; align-items:center; gap:10px; font-size:22px;">
-    <img src="https://i.postimg.cc/0j180Dvt/cud48-icon.png" alt="emoji" style="width:28px; height:28px;">
-    Wuthering Waves or Waifu Waves? Players React to Sexy New Characters!
+  <h2 style="display:flex; align-items:center; gap:10px; font-size:22px; justify-content: space-between;">
+    <span style="display:flex; align-items:center; gap:10px;">
+      <img src="https://i.postimg.cc/0j180Dvt/cud48-icon.png" alt="emoji" style="width:28px; height:28px;">
+      FBI Uses Gamer Data to Identify Psychopaths? Myth Debunked
+    </span>
+
+    <!-- Reaction Button next to title -->
+    <div style="display:flex; align-items:center; gap:8px; cursor:pointer;" onclick="handleReaction(this, 'fbi-news')">
+      <img
+        src="https://i.postimg.cc/q7sXHMFy/7074-Fbi-chan.png"
+        data-default="https://i.postimg.cc/q7sXHMFy/7074-Fbi-chan.png"
+        data-active="https://i.postimg.cc/q7sXHMFy/7074-Fbi-chan.png"
+        alt="reaction emoji"
+        style="width:28px; height:28px;"
+      />
+      <span id="count-fbi-news" style="color:#ccc; font-weight:bold;">100</span>
+    </div>
   </h2>
 
-  <img src="https://i.postimg.cc/pLLPC2Nt/IMG-20250518-193746.jpg" alt="Wuthering Waves" style="width:100%; border-radius:12px; margin:15px 0;">
+  <img src="https://i.postimg.cc/ryJntgQx/images-44.jpg" alt="FBI News" style="width:100%; border-radius:12px; margin:15px 0;">
 
   <p style="font-size:15px; line-height:1.6;">
-    The latest update in Wuthering Waves has sparked some… <i>visual appreciation</i> among players.  
-    With each new character reveal, the game seems to be slowly shifting from action-RPG to a waifu showcase.  
-    <br><br>
-    “Am I playing or just watching an anime fashion show?” one player joked on Discord.  
-    <br><br>
-    While developers haven’t commented, fans are now more excited about outfits than actual combat mechanics!
+    A rumor has been spreading that the FBI uses gamer data to identify potential psychopaths based on interactions with NPCs.  
+    However, NBC News has confirmed this is false and the circulating image is fabricated.
   </p>
 
-  <!-- Reaction Button -->
-  <div style="margin-top:20px; display:flex; align-items:center; gap:10px;">
-    <button onclick="addReaction()" style="padding:10px 18px; background:#ff5e99; border:none; border-radius:10px; color:white; cursor:pointer;">
-      React
-    </button>
-    <span id="reactionCount" style="color:#ccc;">...</span>
-  </div>
+</div>
 
-  <script>
-    // CountAPI setup
-    const namespace = 'pulsebomb-news';
-    const key = 'wuthering-waves-news';
-    const countEl = document.getElementById('reactionCount');
+<script>
+  function handleReaction(element, postId) {
+    const countSpan = document.getElementById(`count-${postId}`);
 
-    // Get current count
-    fetch(`https://api.countapi.xyz/get/${namespace}/${key}`)
-      .then(res => res.json())
-      .then(data => {
-        countEl.innerText = data.value + ' reactions';
-      });
+    let count = parseInt(localStorage.getItem(`count-${postId}`)) || 100;
 
-    // Increment on click
-    function addReaction() {
-      fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-        .then(res => res.json())
-        .then(data => {
-          countEl.innerText = data.value + ' reactions';
-        });
+    const imgElement = element.querySelector('img');
+    const defaultSrc = imgElement.getAttribute('data-default');
+    const activeSrc = imgElement.getAttribute('data-active');
+
+    if (imgElement.src.endsWith(defaultSrc.split('/').pop())) {
+      imgElement.src = activeSrc;
+      count++;
+    } else {
+      imgElement.src = defaultSrc;
+      count = Math.max(count - 1, 100);
     }
-  </script>
 
-    </div>
-    
+    countSpan.textContent = count;
+    localStorage.setItem(`count-${postId}`, count);
+  }
+
+  window.onload = () => {
+    const reactionContainers = document.querySelectorAll('h2 > div');
+    reactionContainers.forEach(container => {
+      const postId = container.getAttribute('onclick').match(/'([^']+)'/)[1];
+      const count = parseInt(localStorage.getItem(`count-${postId}`)) || 43;
+      const imgElement = container.querySelector('img');
+      const defaultSrc = imgElement.getAttribute('data-default');
+      const activeSrc = imgElement.getAttribute('data-active');
+
+      document.getElementById(`count-${postId}`).textContent = count;
+
+      if (count > 100) {
+        imgElement.src = activeSrc;
+      } else {
+        imgElement.src = defaultSrc;
+      }
+    });
+  };
+</script>
 <section class="news-section" style="padding: 20px; background-color: #111; color: white; border-radius: 10px; margin: 20px;">
   <h2 style="display: flex; align-items: center; font-size: 22px;">
     <img src="https://i.postimg.cc/q7sXHMFy/7074-Fbi-chan.png" alt="emoji" style="width: 40px; margin-right: 40px;">
