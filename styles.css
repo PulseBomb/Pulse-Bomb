@@ -1,164 +1,239 @@
 /* Reset */
 * {
   box-sizing: border-box;
-  margin: 0;
+  margin: 0; 
   padding: 0;
 }
 body {
   font-family: 'Orbitron', sans-serif;
-  background-color: #0d1117;
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
   color: #c9d1d9;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  scroll-behavior: smooth;
 }
 header {
-  background-color: #161b22;
+  background-color: #0f1620;
   display: flex;
   align-items: center;
-  padding: 10px 30px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
-  gap: 20px;
+  padding: 15px 30px;
+  box-shadow: 0 4px 15px rgba(8, 29, 72, 0.7);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid #2a2f3a;
 }
-header .logo {
-  height: 50px;
-  border-radius: 10px;
+header img {
+  height: 55px;
+  margin-right: 20px;
+  filter: drop-shadow(0 0 3px #58a6ff);
+  transition: transform 0.3s ease;
+}
+header img:hover {
+  transform: scale(1.1);
 }
 nav a {
   color: #c9d1d9;
   text-decoration: none;
   margin-right: 30px;
-  font-weight: 600;
-  transition: color 0.3s;
-  font-size: 18px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: color 0.4s ease, transform 0.3s ease;
+  position: relative;
 }
-nav a:hover,
-nav a.active {
+nav a:hover, nav a.active {
   color: #58a6ff;
+}
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #58a6ff;
+  bottom: -6px;
+  left: 0;
+  transition: width 0.3s ease;
+}
+nav a:hover::after, nav a.active::after {
+  width: 100%;
 }
 .banner {
   background-image: url('https://i.postimg.cc/2jwvNF8s/image.jpg');
   background-size: cover;
   background-position: center;
-  height: 350px;
-  border-radius: 12px;
-  margin: 20px 40px;
+  height: 360px;
+  border-radius: 14px;
+  margin: 30px 20px;
   position: relative;
-  box-shadow: 0 0 40px #58a6ffcc;
+  box-shadow: 0 10px 25px rgba(88, 166, 255, 0.5);
+  overflow: hidden;
+  transition: transform 0.5s ease;
+}
+.banner:hover {
+  transform: scale(1.03);
 }
 .banner::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(8,30,60,0.6) 0%, rgba(0,0,0,0.8) 100%);
+  border-radius: 14px;
+  pointer-events: none;
 }
 .banner-text {
   position: absolute;
-  bottom: 30px;
+  bottom: 25px;
   left: 40px;
-  color: white;
+  color: #58a6ff;
   font-size: 3rem;
-  font-weight: 700;
-  z-index: 1;
-  text-shadow: 0 0 20px #58a6ff;
+  font-weight: 800;
+  z-index: 2;
+  text-shadow:
+    0 0 10px #58a6ff,
+    0 0 20px #1f5fbb,
+    0 0 30px #1f5fbb;
+  letter-spacing: 2px;
 }
 main {
   flex: 1;
-  padding: 0 40px 60px 40px;
-  max-width: 1200px;
+  padding: 0 30px 50px 30px;
+  max-width: 1280px;
   margin: 0 auto;
   width: 100%;
+  scroll-padding-top: 80px;
 }
-.news-section {
-  margin-bottom: 40px;
+section {
+  margin-bottom: 50px;
 }
-.news-section h2 {
+section h2 {
   color: #58a6ff;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   border-bottom: 3px solid #58a6ff;
   padding-bottom: 8px;
-  font-size: 2rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px #58a6ff;
 }
 article {
-  background-color: #161b22;
+  background: linear-gradient(145deg, #1a202e, #161b22);
   padding: 25px 30px;
-  margin-bottom: 25px;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.8);
-  transition: background-color 0.4s ease;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(20, 34, 56, 0.7);
+  transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 article:hover {
-  background-color: #22303c;
+  background: linear-gradient(145deg, #22303c, #1f2a36);
+  box-shadow: 0 12px 35px rgba(88, 166, 255, 0.7);
+  transform: translateY(-5px);
 }
 article h3 {
-  color: #58a6ff;
-  margin-bottom: 15px;
-  font-size: 1.8rem;
+  color: #a1c9ff;
+  margin-bottom: 12px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 5px #58a6ff;
 }
-article img {
+article img:not(.reaction-img) {
   width: 100%;
-  height: 250px;
+  height: 230px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-top: 15px;
-  display: block;
-  box-shadow: 0 5px 15px #58a6ff99;
+  box-shadow: 0 4px 15px rgba(88, 166, 255, 0.5);
+  transition: transform 0.4s ease;
 }
-article p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  margin-top: 15px;
-  color: #ddd;
+article img:not(.reaction-img):hover {
+  transform: scale(1.05);
 }
 .reaction {
-  margin-top: 20px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  margin-top: 15px;
+  user-select: none;
 }
 .reaction-img {
   width: 35px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.25s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 3px #58a6ff);
+  border-radius: 6px;
 }
 .reaction-img:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 10px #58a6ff);
+}
+.reaction-img.active {
+  filter: drop-shadow(0 0 12px #1f5fbb);
   transform: scale(1.2);
 }
+.reaction-count {
+  font-weight: 800;
+  color: #a1c9ff;
+  text-shadow: 0 0 5px #58a6ff;
+  font-size: 1.1rem;
+}
 footer {
-  background-color: #161b22;
+  background-color: #0f1620;
   text-align: center;
   padding: 20px 0;
   color: #8b949e;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  letter-spacing: 1.3px;
+  border-top: 1px solid #22303c;
+  user-select: none;
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .banner-text {
+    font-size: 2.2rem;
+    left: 25px;
+    bottom: 20px;
+  }
+  main {
+    padding: 0 20px 40px 20px;
+  }
+}
+@media (max-width: 600px) {
   header {
     flex-direction: column;
     align-items: flex-start;
     padding: 15px 20px;
   }
   nav a {
-    margin-right: 0;
-    margin-bottom: 15px;
-    font-size: 16px;
+    display: block;
+    margin: 12px 0;
+    font-size: 1rem;
   }
   .banner {
-    margin: 15px 20px;
-    height: 250px;
+    height: 220px;
+    margin: 15px 15px 25px 15px;
   }
   .banner-text {
-    font-size: 2rem;
+    font-size: 1.6rem;
     left: 20px;
-    bottom: 20px;
+    bottom: 15px;
   }
-  main {
-    padding: 0 20px 40px 20px;
+  article {
+    padding: 20px 15px;
   }
-  article img {
-    height: 180px;
+  article img:not(.reaction-img) {
+    height: 160px;
   }
-}
+  section h2 {
+    font-size: 1.7rem;
+  }
+  .reaction-img {
+    width: 30px;
+  }
+  }
