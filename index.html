@@ -215,7 +215,37 @@
   <footer>
     &copy; 2025 Pulse Bomb. All rights reserved.
   </footer> 
-<script src="script.js"></script>
+      function handleReaction(img, postId) {
+  if (localStorage.getItem(postId)) return; // منع الضغط مرتين
+
+  // زيادة العداد عن طريق countapi
+  fetch(`https://api.countapi.xyz/hit/pulsebomb/${postId}`)
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById(`count-${postId}`).innerText = data.value;
+      img.src = img.dataset.active; // غير الصورة للصورة النشطة (مثلاً لون أحمر)
+      localStorage.setItem(postId, true); // سجل إنه ضغط على الزر
+    });
+}
+
+// تحميل عدد الإعجابات عند تحميل الصفحة
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".reaction").forEach(div => {
+    const postId = div.dataset.id;
+    const countSpan = document.getElementById(`count-${postId}`);
+    const img = div.querySelector("img");
+
+    fetch(`https://api.countapi.xyz/get/pulsebomb/${postId}`)
+      .then(response => response.json())
+      .then(data => {
+        countSpan.innerText = data.value || 0;
+
+        if (localStorage.getItem(postId)) {
+          img.src = img.dataset.active;
+        }
+      });
+  });
+});
     </body>
     
 </html>
