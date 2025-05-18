@@ -1,0 +1,153 @@
+<style>
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0; 
+  padding: 0;
+}
+body {
+  font-family: 'Orbitron', sans-serif;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background-color: #161b22;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+}
+header img {
+  height: 50px;
+  margin-right: 15px;
+}
+nav a {
+  color: #c9d1d9;
+  text-decoration: none;
+  margin-right: 25px;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+nav a:hover, nav a.active {
+  color: #58a6ff;
+}
+.banner {
+  background-image: url('https://i.postimg.cc/2jwvNF8s/image.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 320px;
+  border-radius: 10px;
+  margin: 20px;
+  position: relative;
+}
+.banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  border-radius: 10px;
+}
+.banner-text {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  z-index: 1;
+  text-shadow: 0 0 10px #58a6ff;
+}
+main {
+  flex: 1;
+  padding: 0 20px 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+section {
+  margin-bottom: 40px;
+}
+section h2 {
+  color: #58a6ff;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #58a6ff;
+  padding-bottom: 5px;
+  font-size: 1.8rem;
+}
+article {
+  background-color: #161b22;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+article:hover {
+  background-color: #22303c;
+}
+article h3 {
+  color: #58a6ff;
+  margin-bottom: 8px;
+}
+article img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-top: 10px;
+  display: block;
+}
+footer {
+  background-color: #161b22;
+  text-align: center;
+  padding: 15px 0;
+  color: #8b949e;
+  font-size: 0.9rem;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  nav a {
+    display: block;
+    margin: 10px 0;
+    font-size: 1rem;
+  }
+
+  .banner {
+    height: 200px;
+    margin: 10px;
+  }
+
+  .banner-text {
+    font-size: 1.4rem;
+    left: 10px;
+    bottom: 10px;
+  }
+
+  main {
+    padding: 0 10px 20px 10px;
+  }
+
+  section h2 {
+    font-size: 1.5rem;
+  }
+
+  article {
+    padding: 10px 15px;
+  }
+
+  article img {
+    height: 150px;
+  }
+}
+</style>
