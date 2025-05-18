@@ -200,38 +200,6 @@
 
   <footer>
     &copy; 2025 Pulse Bomb. All rights reserved.
-  </footer>
-  <script>
-  function handleReaction(img, id) {
-    if (localStorage.getItem("liked-" + id)) return;
-
-    fetch(`https://api.countapi.xyz/hit/pulsebomb/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById(`count-${id}`).innerText = data.value;
-        img.src = img.dataset.active;
-        localStorage.setItem("liked-" + id, "true");
-      });
-  }
-
-  window.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".reaction").forEach(div => {
-      const id = div.getAttribute("data-id");
-      const img = div.querySelector("img");
-
-      fetch(`https://api.countapi.xyz/get/pulsebomb/${id}`)
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById(`count-${id}`).innerText = data.value;
-        }).catch(() => {
-          document.getElementById(`count-${id}`).innerText = 0;
-        });
-
-      if (localStorage.getItem("liked-" + id)) {
-        img.src = img.dataset.active;
-      }
-    });
-  });
-              </script>    
+  </footer> 
 </body>
 </html>
