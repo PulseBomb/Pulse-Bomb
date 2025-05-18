@@ -264,22 +264,22 @@
     </section>
   </main>
 
-  <!-- عداد المشاهدات -->
-  <script src="https://cdn.counter.dev/script.js" data-id="3cbd30b1-895a-4d6b-9435-a86a40e01821" data-utcoffset="3"></script>
-
-  <footer>
+  
     &copy; 2025 Pulse Bomb. All rights reserved.
+  <div id="view-count">Views: ...</div>
 
-      <div style="text-align: center; margin-top: 20px; font-size: 20px;">
-  <img src="https://i.postimg.cc/5yX74ky3/1000012766-removebg-preview.png" alt="emoji" style="width: 45px; vertical-align: middle; margin-right: 45px;" />
-  Views: <span id="view-count">1021</span>
-      </div>
 <script>
-  fetch('https://api.countapi.xyz/hit/pulsebomb.github.io/visits')
+  fetch('https://abacus.jasoncameron.dev/hit/pulsebomb/homepage')
     .then(res => res.json())
     .then(data => {
-      document.getElementById('view-counter').innerText = `Total Views: ${data.value}`;
+      document.getElementById('view-count').innerText = `Views: ${data.value}`;
+    })
+    .catch(err => {
+      document.getElementById('view-count').innerText = "Failed to load view count";
+      console.error(err);
     });
+</script>
+      </div>
 </script>
 </body>
 </html>
