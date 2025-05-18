@@ -96,7 +96,8 @@
     const defaultSrc = imgElement.getAttribute('data-default');
     const activeSrc = imgElement.getAttribute('data-active');
 
-    if (imgElement.src.endsWith(defaultSrc.split('/').pop())) {
+    // نستخدم includes بدل endsWith عشان نتأكد إنها تنجح دايمًا
+    if (imgElement.src.includes(defaultSrc.split('/').pop())) {
       imgElement.src = activeSrc;
       count++;
     } else {
