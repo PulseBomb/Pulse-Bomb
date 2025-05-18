@@ -89,5 +89,25 @@
     &copy; 2025 Pulse Bomb. All rights reserved.
   </footer>
 <script src="script.js"></script>
+function handleReaction(imgElement, postId) {
+  const countSpan = document.getElementById(`count-${postId}`);
+  let count = parseInt(countSpan.textContent) || 0;
+
+  const defaultSrc = imgElement.getAttribute('data-default');
+  const activeSrc = imgElement.getAttribute('data-active');
+
+  if (imgElement.src === defaultSrc || imgElement.src.endsWith(defaultSrc.split('/').pop())) {
+    // غير لون الصورة للاعجاب وزود العدد
+    imgElement.src = activeSrc;
+    count++;
+  } else {
+    // رجع الصورة للوضع الافتراضي ونقص العدد
+    imgElement.src = defaultSrc;
+    count = Math.max(count - 1, 0);
+  }
+
+  countSpan.textContent = count;
+}
 </body>
+
 </html>
