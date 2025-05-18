@@ -37,7 +37,31 @@ nav a {
 nav a:hover {
   color: #f72585;
 }
+nav a {
+  position: relative;
+  color: #c9d1d9;
+  text-decoration: none;
+  margin-right: 25px;
+  font-weight: 600;
+  transition: color 0.3s;
+  padding-bottom: 5px;
+}
 
+nav a.active {
+  color: #58a6ff;
+}
+
+nav a.active::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: #58a6ff;
+  border-radius: 50%;
+}
 /* Banner */
 .banner {
   background-image: url('https://i.postimg.cc/2jwvNF8s/image.jpg');
