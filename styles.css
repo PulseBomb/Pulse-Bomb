@@ -1,197 +1,135 @@
-/* Reset بسيط */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  scroll-behavior: smooth;
-  user-select: none;
-}
 
-/* ألوان النيون الداكنة */
-:root {
-  --color-bg: #0a0a23;
-  --color-primary: #00fff7;
-  --color-secondary: #ff00c8;
-  --color-accent: #fffc00;
-  --color-text: #e0e0e0;
-  --color-shadow: rgba(0, 255, 247, 0.5);
-  --color-hover: #ffffff;
-}
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: url('https://i.postimg.cc/2jwvNF8s/image.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #c9d1d9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: brightness(0.4);
+    }
+    header {
+      background-color: rgba(22, 27, 34, 0.85);
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    header img {
+      height: 50px;
+      margin-right: 20px;
+    }
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+    nav a {
+      color: #c9d1d9;
+      text-decoration: none;
+      padding: 10px 18px;
+      background-color: rgba(40, 45, 55, 0.8);
+      border-radius: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: background-color 0.3s, color 0.3s, transform 0.2s;
+      user-select: none;
+    }
+    nav a:hover, nav a.active {
+      background-color: #58a6ff;
+      color: #0d1117;
+      transform: scale(1.1);
+      box-shadow: 0 0 12px #58a6ff;
+    }
+    main {
+      flex: 1;
+      padding: 40px 20px 60px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      backdrop-filter: brightness(1.2);
+    }
+    section {
+      margin-bottom: 50px;
+    }
+    section h2 {
+      color: #58a6ff;
+      margin-bottom: 25px;
+      border-bottom: 3px solid #58a6ff;
+      padding-bottom: 8px;
+      font-size: 2.2rem;
+      letter-spacing: 0.05em;
+    }
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+    article {
+      background-color: rgba(22, 27, 34, 0.9);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    article:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px #58a6ffaa;
+      background-color: rgba(40, 55, 70, 0.95);
+    }
+    article h3 {
+      color: #58a6ff;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      letter-spacing: 0.03em;
+    }
+    article p {
+      flex-grow: 1;
+      font-size: 1rem;
+      color: #a0aec0;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+    article img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      object-fit: cover;
+      height: 160px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+    }
+    footer {
+      background-color: rgba(22, 27, 34, 0.85);
+      text-align: center;
+      padding: 15px 0;
+      color: #8b949e;
+      font-size: 0.9rem;
+      user-select: none;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.7);
+    }
 
-/* خلفية الموقع */
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* الهيدر الكبير مع صورة الخلفية */
-header {
-  position: relative;
-  width: 100%;
-  height: 450px;
-  background: url('https://i.postimg.cc/Hng7GtZ2/image.jpg') center/cover no-repeat;
-  box-shadow: 0 0 30px var(--color-primary);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: var(--color-primary);
-  font-size: 3rem;
-  font-weight: 900;
-  text-shadow: 0 0 8px var(--color-primary);
-  letter-spacing: 6px;
-  font-family: 'Segoe UI Black', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  user-select: none;
-}
-
-/* تأثير التوهج المتحرك على النص في الهيدر */
-header::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 150%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(0, 255, 247, 0.6),
-    transparent
-  );
-  animation: shine 3s infinite;
-  pointer-events: none;
-  filter: blur(30px);
-  mix-blend-mode: screen;
-}
-
-@keyframes shine {
-  0% {
-    left: -150%;
-  }
-  50% {
-    left: 150%;
-  }
-  100% {
-    left: -150%;
-  }
-}
-
-/* المحتوى الرئيسي */
-main {
-  padding: 40px 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-/* كروت المحتوى */
-.card {
-  background: #111133cc;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 30px;
-  box-shadow: 0 0 20px var(--color-secondary);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  color: var(--color-text);
-}
-
-/* تأثير الحركة لما تمرر الماوس على الكارد */
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 0 40px var(--color-accent);
-}
-
-/* أزرار نيون */
-button {
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-  border: none;
-  border-radius: 30px;
-  padding: 12px 30px;
-  color: var(--color-text);
-  font-weight: 700;
-  font-size: 1.1rem;
-  cursor: pointer;
-  box-shadow: 0 0 20px var(--color-primary);
-  transition: box-shadow 0.4s ease, transform 0.3s ease;
-  user-select: none;
-}
-
-/* تأثير الحركة على الأزرار */
-button:hover {
-  box-shadow: 0 0 40px var(--color-accent);
-  transform: scale(1.1);
-}
-
-/* روابط تفاعلية */
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: var(--color-accent);
-  text-shadow: 0 0 8px var(--color-accent);
-}
-
-/* تنسيق الخط */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Segoe UI Black', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: var(--color-primary);
-  text-shadow: 0 0 8px var(--color-primary);
-  margin-bottom: 12px;
-  user-select: none;
-}
-
-/* فقرة النص */
-p {
-  line-height: 1.6;
-  font-size: 1.05rem;
-  color: var(--color-text);
-  user-select: text;
-}
-
-/* قائمة جانبية (لو حبيت تضيفها بعدين) */
-.sidebar {
-  background: #111144dd;
-  box-shadow: 0 0 15px var(--color-primary);
-  border-radius: 12px;
-  padding: 20px;
-  color: var(--color-text);
-  max-width: 300px;
-}
-
-/* متجاوب للجوال */
-@media (max-width: 768px) {
-  header {
-    height: 300px;
-    font-size: 2rem;
-  }
-  main {
-    padding: 20px 10px;
-  }
-  .card {
-    margin-bottom: 20px;
-  }
-  button {
-    padding: 10px 25px;
-    font-size: 1rem;
-  }
-}
-
-/* شوية حركات تكميلية للكوول */
-body::-webkit-scrollbar {
-  width: 10px;
-}
-
-body::-webkit-scrollbar-track {
-  background: #0a0a23;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-  border-radius: 10px;
-  box-shadow: 0 0 10px var(--color-primary);
-}
+    /* Responsive */
+    @media (max-width: 768px) {
+      .banner-text {
+        font-size: 1.8rem !important;
+        left: 20px !important;
+        bottom: 15px !important;
+      }
+      nav a {
+        padding: 8px 14px;
+        font-size: 14px;
+      }
+      }
