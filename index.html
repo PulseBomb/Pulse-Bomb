@@ -3,29 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>News Site</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>NewsPulse</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <img src="https://i.postimg.cc/YC62FyxB/1000012716-removebg-preview.png" alt="Site Logo" class="logo" />
+    <img src="https://i.postimg.cc/YC62FyxB/1000012716-removebg-preview.png" alt="NewsPulse Logo" class="logo" />
   </header>
 
-  <section class="hero">
-    <!-- الخلفية ثابتة عن طريق CSS -->
+  <div class="container">
     <nav class="sidebar">
-      <a href="index.html" class="nav-btn">Home</a>
+      <a href="index.html" class="nav-btn active">Home</a>
       <a href="news.html" class="nav-btn">News</a>
       <a href="article.html" class="nav-btn">Article</a>
     </nav>
-  </section>
 
-  <main class="content">
-    <article class="news-post">
-      <h2>Breaking News: AI Revolutionizes Web Design</h2>
-      <p>Today, AI technology has taken a giant leap forward by enabling automatic website design that adapts perfectly to user needs...</p>
-      <a href="article.html" class="read-more">Read More</a>
-    </article>
-  </main>
+    <main class="main-content">
+      <section class="news-cards">
+        <article class="card">
+          <h2>AI Revolutionizes Web Design</h2>
+          <p>Artificial Intelligence is changing the way websites are built, making design faster and smarter than ever.</p>
+          <a href="article.html" class="read-more">Read More</a>
+        </article>
+
+        <article class="card">
+          <h2>Global Markets Rally Today</h2>
+          <p>Stock markets around the world showed strong gains amid economic recovery signs.</p>
+          <a href="article.html" class="read-more">Read More</a>
+        </article>
+
+        <article class="card">
+          <h2>New Tech Innovations Unveiled</h2>
+          <p>Leading tech companies revealed groundbreaking gadgets and software at the annual expo.</p>
+          <a href="article.html" class="read-more">Read More</a>
+        </article>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
