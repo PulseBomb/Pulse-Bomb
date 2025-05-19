@@ -42,7 +42,7 @@ nav {
   display: flex;
   gap: 25px;
   flex-grow: 1;
-  border-radius: 0; /* مربع */
+  border-radius: 0;
   box-shadow: 0 2px 5px rgba(75, 0, 130, 0.4);
 }
 
@@ -61,7 +61,7 @@ nav a.active {
   color: #004d58;
   transform: scale(1.1);
   box-shadow: 0 0 8px rgba(0, 188, 212, 0.6);
-  border-radius: 0; /* مربع */
+  border-radius: 0;
 }
 
 main {
@@ -199,6 +199,13 @@ main {
   nav {
     flex-grow: 1;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  nav a {
+    padding: 6px 10px;
+    font-size: 0.9rem;
   }
 
   .main-news-content {
@@ -216,3 +223,18 @@ main {
   }
 
   .news-card {
+    height: 220px;
+  }
+
+  .news-card h2 {
+    font-size: 1.1rem;
+    bottom: 45px;
+    right: 12px;
+  }
+
+  .news-card p {
+    font-size: 0.9rem;
+    bottom: 10px;
+    right: 12px;
+  }
+}
