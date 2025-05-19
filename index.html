@@ -158,28 +158,81 @@
       <!-- مقالات قادمة -->
     </section>
 
-    <!-- قسم التعليقات -->
-    <section id="comments-section" style="max-width: 800px; margin: 40px auto;">
-      <h2>Comments</h2>
-      <div id="comments"></div>
-      <script src="https://giscus.app/client.js"
-        data-repo="PulseBomb/Pulse-Bomb"
-        data-repo-id="R_kgDOOrGq2w"
-        data-category="General"
-        data-category-id="DIC_kwDOOrGq284CqPHF"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        crossorigin="anonymous"
-        async>
+    <section id="comments-section" style="max-width: 800px; margin: 40px auto; color: #fff;">
+  <h2>Comments</h2>
+  
+  <form id="comment-form" style="margin-bottom: 20px;">
+    <input type="text" id="username" placeholder="Your name" required style="padding: 8px; width: 30%; margin-right: 10px;">
+    <input type="text" id="comment" placeholder="Your comment" required style="padding: 8px; width: 50%; margin-right: 10px;">
+    <button type="submit" style="padding: 8px;">Post</button>
+  </form>
+  
+  <div id="comments-list" style="background:#222; padding: 15px; border-radius: 8px; max-height: 400px; overflow-y: auto;">
+    <!-- التعليقات هنا هتظهر -->
+  </div>
+</section>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+<script>
+  // Your web app's Firebase configuration (غيرهم بالمعلومات الخاصة بك)
+  const firebaseConfig = {
+    apiKey: "AIzaSyBdr8mcODakhdOoJqRjnUALoPuO8ORBGDE",
+    authDomain: "kat0-ba66c.firebaseapp.com",
+    databaseURL: "https://kat0-ba66c-default-rtdb.firebaseio.com",
+    projectId: "kat0-ba66c",
+    storageBucket: "kat0-ba66c.firebasestorage.app",
+    messagingSenderId: "216688927261",
+    appId: "1:216688927261:web:d71f654adc73d2074f5cf4",
+    measurementId: "G-C6QDGB1Q5N"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  const commentForm = document.getElementById('comment-form');
+  const commentsList = document.getElementById('comments-list');
+
+  // تحميل التعليقات من Firebase وعرضها
+  function loadComments() {
+    db.ref('comments').on('value', snapshot => {
+      commentsList.innerHTML = ''; // فرغ القائمة
+      const comments = snapshot.val();
+      if(comments) {
+        Object.values(comments).forEach(comment => {
+          const div = document.createElement('div');
+          div.style.borderBottom = "1px solid #444";
+          div.style.padding = "10px 0";
+          div.innerHTML = `<strong>${escapeHTML(comment.username)}</strong>: ${escapeHTML(comment.text)}`;
+          commentsList.appendChild(div);
+        });
+      } else {
+        commentsList.innerHTML = '<p>No comments yet.</p>';
+      }
+    });
+  }
+
+  // إرسال تعليق جديد لـ Firebase
+  commentForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const username = commentForm.username.value.trim();
+    const text = commentForm.comment.value.trim();
+    if(username && text) {
+      db.ref('comments').push({ username, text });
+      commentForm.reset();
+    }
+  });
+
+  // دالة بسيطة لحماية من XSS
+  function escapeHTML(str) {
+    return str.replace(/[&<>"']/g, function(m) {
+      return {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[m];
+    });
+  }
+
+  loadComments();
       </script>
-    </section>
-  </main>
-<body>
 
   <!-- باقي محتوى الصفحة -->
 
