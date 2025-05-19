@@ -1,172 +1,805 @@
-/* أساسي */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@\import "https://malscraper.azurewebsites.net/covers/anime/Katana_oo/presets/dataimagelink";
+@\import "https://malscraper.azurewebsites.net/covers/manga/Katana_oo/presets/dataimagelink";
+ 
+/* List design by 5cm with changes by Shishio-kun and Valerio_Lyndon*/
+ 
+@\import "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700";
+
+
+/* WALLPAPER IMAGE AND COLOR
+To change background images: Upload the new background to Imgur or a similar site, then copy the direct link (or Original GIF link if it's animated) and paste it into the parenthesis. Save.
+
+Adjust the background position with the percentages.
+
+Change any colors by replacing color names and numbers with the color you want.
+*/
+
+body{
+background-image: url(https://i.imgur.com/uQMOtTN.png);
+background-position: right top;
+background-size: ;	
+background-color: black;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+background-attachment: fixed;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0b0c10;
-  color: #e0e0e0;
-  line-height: 1.6;
-  overflow-x: hidden;
-  background-image: url(https://myanimelist.cdn-dena.com/images/userimages/17984403.jpg);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  min-height: 100vh;
+
+/* TITAN HAND*/
+
+body:before{
+content: "";
+background-image: url(https://i.imgur.com/uLUkXHv.png);
+background-size: cover;	
+width: 100%;
+height: 100%;
+top: 10px;
+left: 0;
+position: fixed;
+	z-index: -4;
+	animation: HAND 2s 1;
 }
 
-/* الهيدر */
-header {
-  background: rgba(15, 23, 42, 0.9);
-  padding: 20px;
-  text-align: center;
+@keyframes HAND {
+	0% {
+	top: 500px;
+	}
+	100% {
+  top: 10px;
+	}
 }
 
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+/* TITAN */
+
+body:after{
+content: "";
+background-image: url(https://i.imgur.com/I1zot3n.png);
+background-size: cover;	
+width: 100%;
+height: 100%;
+top: 10px;
+left: 0;
+position: fixed;
+	z-index:-5 !important;
+	animation: TITAN 6s 1;
+	/* Banner fade effect.
+	 * min: 0 / recommended max: 1
+	 * higher = more fading */
+	--banner-fade-multiplier: 0.8;
+	
+	-webkit-mask: linear-gradient(to bottom, rgba(0,0,0,0), #000 calc(20% * var(--banner-fade-multiplier)));
+	mask: linear-gradient(to bottom, rgba(0,0,0,0), #000 calc(20% * var(--banner-fade-multiplier)));
+
 }
 
-.logo {
-  height: 50px;
+@keyframes TITAN {
+	0% {
+	top: 100%;
+	}
+	20% {
+	top: 100%;
+	}
+	100% {
+  top: 10px;
+	}
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  flex-wrap: wrap;
+
+/* FOREGROUND WALL
+This wall fades into transparency to bring forward the particle effect. */
+.header:after{
+content: "";
+background-image: url(https://i.imgur.com/6RftrEm.png);
+background-size: cover;	
+width: 100% !important;
+height: 100% !important;
+top: 0px;
+left: 0;
+position: fixed;
+z-index:-2;	
+opacity: 0;	
+animation: WALL 8s 1;
+	
+} 
+
+@keyframes WALL {
+0% { opacity: 1;}
+70% { opacity: 1;}
+100% {opacity: 0;}
 }
 
-nav ul li a {
-  color: #a1cfff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: color 0.3s ease;
+
+/* BACKGROUND WALL 
+The wall you see after intro.*/
+.list-container:after{
+content: "";
+background-image: url(https://i.imgur.com/6RftrEm.png);
+background-size: cover;	
+width: 100% !important;
+height: 100% !important;
+top: 0px;
+left: 0;
+position: fixed;
+z-index: -4;	
 }
 
-nav ul li a:hover,
-nav ul li a.active {
-  color: #00aaff;
+
+/* PARTICLES */
+.header:before{
+    z-index: -2 !important;
+    filter: hue-rotate(0deg);
+    position: fixed;
+    display: block;
+    content: '';
+    left: 0;
+    bottom: 0;
+    margin-left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(https://i.imgur.com/zhBAjPa.png), url(https://i.imgur.com/sH5Xot3.png);
+    animation: PARTICLES 15s linear infinite;
+    pointer-events: none !important;
+		-webkit-mask-image: linear-gradient(to bottom, transparent 30%, black);
+	mask-image: linear-gradient(to bottom, transparent 30%, black);
 }
 
-/* البانر */
-.banner {
-  background: rgba(0, 170, 255, 0.2);
-  margin: 30px auto;
-  max-width: 900px;
-  padding: 30px 20px;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 0 10px #00aaffaa;
+@keyframes PARTICLES {
+    0% { background-position: -485px 487px, 485px 487px;}
+    100% { background-position: 0 0, 0 0;   }
 }
 
-.banner h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
+/* QUOTE */
+.list-container:before{
+content: "On that day, mankind received a grim reminder.";
+font-size: 48px;
+font-family: vivaldi;
+top: -380px;
+left: 0%;
+text-align: center;
+position: absolute;
+animation: QUOTE 7s 1;
+color: white;
+	text-shadow:1px 0 0 black,0 1px 0 black,-1px 0 0 black,0 -1px 0 black;
+} 
+
+@keyframes QUOTE {
+0% { opacity: 0; }
+90% { opacity: 0;}
+100% { opacity: 1;}
 }
 
-.banner p {
-  font-size: 1.2rem;
-  color: #c0e8ff;
+/* LIST SETTER AND COLOR 
+These codes set the color of the list table and also the distance from the top and bars.*/
+.list-container{
+padding-top: 150px;	
 }
 
-/* الكاردات */
-.cards {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  max-width: 1000px;
-  margin: 20px auto 50px;
-  padding: 0 10px;
+.list-block{
+background-color: rgba(25,5,5,.8);	
+padding-top: 50px;	
+margin-top: -0px !important;
+	padding-bottom: 200px;
 }
 
-.card {
-  background: rgba(15, 23, 42, 0.8);
-  border-radius: 12px;
-  box-shadow: 0 4px 10px #003e6b;
-  width: 300px;
-  padding: 15px;
-  transition: transform 0.3s ease;
+
+/* FOOTER */
+#footer-block {
+background-color: rgba(25,5,5,.8) !important;
+margin-top: 0px;
 }
 
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 15px #00aaff;
+
+/* BANNER AVATAR
+To change the background image: Upload the new background to Imgur or a similar site, then copy the direct link (or Original GIF link if it's animated) and paste it into the parenthesis. Save.
+
+*/
+
+#status-menu .status-menu:before {
+background: center/cover url(https://i.imgur.com/BgIXGhA.gif);
 }
 
-.card img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 12px;
+
+
+
+/* BANNER TEXT AND ICONS COLOR
+Change the color and fill (color for icons) by replacing #999 with the color you want. The last codes are for the search boxes.
+Get color codes here:https://htmlcolorcodes.com/
+*/
+
+.list-menu-float .icon-menu svg.icon,.list-menu-float .icon-menu.profile:before{
+	color: #999 !important;
+	fill: #999 !important;
+
 }
 
-.card h3 {
-  color: #00aaff;
-  margin-bottom: 10px;
-  font-size: 1.4rem;
+.header .header-menu .header-info a,#header-menu-button,.header .header-menu .list-menu .icon-menu .text,
+#status-menu .status-button.on,.header .username,.header .header-menu.other .btn-menu,#header-menu-button{
+	color: white !important;
+	fill: white !important;
+
 }
 
-.card p {
-  color: #c0d6e4;
-  font-size: 1rem;
+
+.header .header-menu .header-info a:hover, #header-menu-dropdown a:hover,.header .header-menu .header-info a:hover,.header .header-menu .list-menu .icon-menu .text:hover,.list-menu-float .icon-menu svg.icon:hover,.list-menu-float .icon-menu.profile:hover:before{
+	color: white !important;
+	fill: white !Important;
 }
 
-/* الفوتر */
-footer {
-  background: rgba(15, 23, 42, 0.9);
-  color: #666;
-  text-align: center;
-  padding: 15px 10px;
-  font-size: 0.9rem;
+.header .header-menu .header-info a,#header-menu-button,.header .header-menu .list-menu .icon-menu .text,
+#status-menu .status-button.on,.header .username,.header .header-menu.other .btn-menu,#header-menu-button
+{text-shadow:1px 0 0 black,0 1px 0 black,-1px 0 0 black,0 -1px 0 black;}
+
+
+#search-box input {
+    background-image: url() !important;
+	  background-color: white !important;
+	  color: #999 !Important;
 }
 
-/* استجابة الموبايل */
-@media (max-width: 767px) {
-  .header-container {
-    justify-content: center;
-    gap: 15px;
-  }
 
-  .logo {
-    height: 40px;
-  }
-
-  nav ul {
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-  }
-
-  .banner {
-    max-width: 95%;
-    padding: 20px 15px;
-  }
-
-  .cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card {
-    width: 90%;
-  }
-
-  .banner h2 {
-    font-size: 1.5rem;
-  }
-
-  .banner p {
-    font-size: 1rem;
-  }
+.status-menu-container .search-container #search-button .fa {
+display: inherit !important;
+color:  #999 !important;
+position: absolute;
+left: 8px;
+font-size: 14px;
 }
+
+
+
+/* CATEGORY BAR COLOR
+Change the colors by replacing #ef8577 with the color you want. First color is for the category bar, and second color is for triangle under the category bar.
+
+Get color codes here:
+https://htmlcolorcodes.com/
+*/
+
+#status-menu, .status-menu-container.fixed,#status-menu .status-button {
+background-color:  #131006;
+}
+
+#status-menu .status-button.on::after{
+border-top: 20px solid g#131006  ;}
+
+
+
+/* CATEGORY LINK COLORS
+Change the colors by replacing #999 or white with the color you want. First color is for the category being used, and second color is for other categories.
+
+Get color codes here:
+https://htmlcolorcodes.com/
+*/
+
+	#status-menu .status-button.on{
+	color: white !important;
+	}
+	
+	#status-menu .status-button{
+	color: white !important;
+	}
+	
+	
+	#status-menu .status-button:hover{
+	color: white !important;	
+	}
+	
+	
+	#status-menu .status-button:not(.on):hover {
+		background:  #666666;
+		color: white !important;	
+	}
+
+/* SORT BY AND LINKS COLORS
+First color is for the strip behind the sort links.
+Second color is for Sort By: and third color is for the following links on the right of it (Anime Title, Score, etc).
+Fourth color is the background behind the links on hover.
+
+Get color codes here:
+https://htmlcolorcodes.com/
+*/
+
+.list-table-header{
+background:  #131006 !important;
+}
+
+.list-table-header::before {
+color: white;
+}
+
+	.list-unit .list-status-title .stats a,
+	#advanced-options-button, .list-table .list-table-header .header-title .link.sort
+	{
+	color: white !important;
+	}
+	
+	.list-unit .list-status-title .stats a:hover,
+	#advanced-options-button:hover, .list-table .list-table-header .header-title .link.sort:hover 	
+	{
+	background: #666666;
+	}
+	
+	.list-unit .list-status-title .stats a:hover,
+	.list-table .list-table-header .header-title .link.sort:hover, #advanced-options-button:hover{
+background:  #666666;
+	}
+	
+	
+
+
+
+
+
+/* DECIMAL SCORES
+Replace the number or ID with the number that appears in the URL for the anime you want to add decimal scores to. For manga, also change anime to manga.
+
+Change the decimal amount with the number after content.
+*/
+
+.data.title a[href^="/anime/5525"] ~ .add-edit-more:before { content:".5"; }
+
+.data.title a[href^="/anime/48"] ~ .add-edit-more:before { content:".5"; }
+
+
+.data.title a[href^="/anime/ID"] ~ .add-edit-more:before { content:".5"; }
+
+
+.data.title a[href^="anime/ID"] ~ .add-edit-more:before { content:".5"; }
+
+
+.data.title a[href^="/anime/ID"] ~ .add-edit-more:before { content:".5"; }
+
+
+
+/* DECIMAL SCORES SETTINGS
+Change the text color here.
+*/
+
+.data.title .add-edit-more:before {
+color: black;
+
+position: absolute;
+top: 0px;
+left: 175px;
+display: block;
+width: 12px;
+height: 20px;
+font-weight: bold;
+font-size: 12px;
+pointer-events: none;
+}
+
+
+
+/* SCORES TAG COLORS
+Change the color code after background to the one you want. Get color codes from this page:
+https://htmlcolorcodes.com/
+
+The codes below are for each category's tag and decimal tag (you can make the decimals different tag colors).
+*/
+
+
+
+.list-table .list-table-data .data.status.reading ~ .data.score .link,
+.status.reading ~ .title .add-edit-more::before,
+.list-table .list-table-data .data.status.watching ~ .data.score .link,
+.status.watching ~ .title .add-edit-more::before {
+   background: #cfe88d;
+}
+
+.list-table .list-table-data .data.status.completed ~ .data.score .link,
+.status.completed ~ .title .add-edit-more::before {
+background: #ffff92;
+}
+
+.list-table .list-table-data .data.status.onhold ~ .data.score .link,
+.status.onhold ~ .title .add-edit-more::before {
+background: #afb8e2;
+}
+
+.list-table .list-table-data .data.status.dropped ~ .data.score .link,
+.status.dropped ~ .title .add-edit-more::before {
+background: #fc7671;
+}
+
+
+
+/* LIST FONT COLORS
+
+Change the color code after background to the one you want. Get color codes from this page:
+https://www.hexcolortool.com/
+*/
+
+body,
+.list-table .list-table-data .data.volume a,
+.list-table .list-table-data .data.progress,
+.list-table .list-table-data .data.chapter a,
+.list-table .list-table-data .data.studio,
+.list-table .list-table-data .data.licensor,
+.list-table .list-table-data .data.progress a,
+.list-table .list-table-data .data.magazine a,
+.list-table .list-table-data .data.studio a,
+.list-table .list-table-data .data.licensor a,
+.list-table .list-table-data .data.tags a,
+.list-table .list-table-data .tags .edit
+{
+color: black !important;
+}
+
+
+body
+{
+font: 300 11px Open Sans;
+}
+
+
+/* TEXT OUTSIDE COVERS*/
+
+	.list-table .list-table-data .data.season a,
+	.list-table .list-table-data .data.season,
+	.list-table .list-table-data .data a,
+	.list-table .list-table-data .data.title a,
+	.list-table .list-table-data .data.rated,
+	.list-table .list-table-data .data.started,
+	.list-table .list-table-data .data.finished,
+	.list-table .list-table-data .data.airing-started,
+	.list-table .list-table-data .data.airing-finished,
+	.list-table .list-table-data .data.priority
+	{
+	color: white !important;
+	}
+	
+	.list-table .list-table-data:hover .data .add a,
+	.list-table .list-table-data:hover .data .edit a
+	{
+	color: white !important;
+	text-decoration: none;
+	}
+	
+	.list-table .list-table-data:hover .data.season a{
+		color: white !important;
+	}
+	
+
+
+/* ANIME TITLE */
+.list-table .list-table-data .data.title .link{
+color: #333 !important;
+}
+
+/* LINKS ON HOVER*/
+.list-table .list-table-data .data a:not(.edit-disabled):hover{
+color:  !important;
+}
+
+
+
+
+/* PAGE BOTTOM TEXT*/
+
+.list-unit .list-stats{
+color: #777 !important;
+}
+
+#copyright{
+color: #777 !important;
+}
+
+.list-unit .list-stats {	
+		    background-color: black !important;	
+			  color: white !important;	
+		}
+		
+		
+
+/* COVER OVERLAY
+Normally, its white with sligth transparency, but you can change it here.
+Change the color code after background to the RGBA colors you want. Get new RGBA codes with an RGBA CSS generator:
+https://www.hexcolortool.com/
+*/
+.list-table .list-table-data:hover .data.title {
+background: rgba(255,255,255,0.8);
+outline: 3px solid white;
+}
+
+
+
+		
+		
+		
+		/* OTHER CODES*/	
+			
+			
+			
+		.list-table .list-table-data:hover .data .edit a{	
+			font-size: 11px;	
+			color: ;	
+		}	
+		*:not(a:hover):not(input) {	
+			cursor: default;	
+		}	
+		a:link, a:active, a:visited {	
+			color: black;	
+		}	
+	.header .header-title, .header .header-menu .btn-menu,#header-menu-dropdown svg, 		
+			[data-work="anime"] .icon-menu.anime-list, [data-work="manga"] .icon-menu.manga-list,[data-owner=""] .list-menu-float, 		
+			.list-menu-float .icon-menu.setting, form[action],.list-menu-float .icon-menu .text,		
+			.list-unit .list-status-title .text, 		
+			.list-table .list-table-header .header-title.status,		
+			.list-table .list-table-data .data.status,.list-table .list-table-data .data.status.plantowatch ~ .data.score,.cover-block,		
+			
+			i.fa:not([class*=sort]):not([class$=circle]), img, .icon-watch.ml4{		
+				display: none;		
+			}	
+		.header {	
+			width: 100%;	
+			height: 480px;	
+		}	
+		.header .header-menu.other {	
+			position: static;	
+			color: #999;	
+			text-align: left;	
+			text-transform: uppercase;	
+		}	
+		.header .header-menu.other .btn-menu {	
+			font: 700 25px Open Sans;	
+			color: #999;	
+			display: inline-block;	
+			overflow: hidden;	
+			text-indent: -116px;	
+			position: relative;	
+			top: 13px;	
+			left: 18px;	
+		}	
+		.header .header-menu .header-info {	
+			position: absolute;	
+			top: 17px;	
+			right: 257px;	
+			font-size: 0;	
+		}	
+		.header .username {	
+			font-weight: 700;	
+		}	
+		.header a, #header-menu-dropdown a {	
+			width: auto;	
+			height: auto;	
+			font-weight: 400;	
+			color: #999 !important;	
+			transition: none;	
+		}	
+		.header .header-menu .header-info a, #header-menu-dropdown a {	
+			font-size: 11px;	
+			margin: 0 15px;	
+		}	
+		.header .header-menu .header-info a:hover, #header-menu-dropdown a:hover {	
+			background: none;	
+			text-decoration: none;	
+		}	
+		#header-menu-dropdown {	
+			display: block!important;	
+			top: 23px;	
+			right: 182px;	
+			background: none;	
+			border: 0;	
+			box-shadow: none;	
+		}	
+		.list-menu-float {	
+			position: absolute;	
+			top: 23px;	
+			right: 185px;	
+			width: auto;	
+			border: 0;	
+		}	
+		.list-menu-float .icon-menu {	
+			display: inline-block;	
+			width: 16px;	
+			height: 16px;	
+			background: none !important;	
+			margin: 0 5px;	
+		}	
+		.list-menu-float .icon-menu svg.icon {	
+			position: static;	
+			width: 16px;	
+			height: 16px;	
+			fill: #aaa;	
+		}	
+		.list-menu-float .icon-menu:hover svg.icon, .header .header-menu .list-menu .icon-menu .text {	
+			position: static;	
+			fill: #ef8577;	
+		}	
+		.list-menu-float .icon-menu:not(.profile):hover {	
+			width: auto;	
+			background: none;	
+		}	
+		.list-menu-float .icon-menu.profile {	
+			background: none !important;	
+		}	
+		.list-menu-float .icon-menu.profile:before {	
+			content: '\f007';	
+			font: 16px FontAwesome;	
+			color: #aaa;	
+			line-height: 15px;	
+			position: absolute;	
+			right: 2px;	
+		}	
+		.list-menu-float .icon-menu.profile:hover:before {	
+			color: #ef8577;	
+		}	
+		.list-container {	
+			background: none !important;	
+			width: 100%;	
+			border: 0;	
+		}	
+		#status-menu, .status-menu-container.fixed {	
+			width: 100%;	
+			height: auto;	
+			border: 0;	
+			position: static;	
+		}	
+		#status-menu .status-menu {	
+			width: 100%;	
+			border-spacing: 0;	
+			text-align: center;	
+		}	
+		#status-menu .status-menu:before {	
+			content: '';	
+			display: inline-block;	
+			width: 90px;	
+			height: 90px;	
+			border-radius: 50%;	
+			position: absolute;	
+			margin-top: -20px;	
+		}	
+		#status-menu .status-button {	
+			display: inline-block;	
+			font: 300 13px Open Sans;	
+			color: white;	
+			letter-spacing: 1px;	
+			text-transform: uppercase;	
+			padding: 15px 20px;	
+		}	
+		#status-menu .status-button:first-child {	
+			margin-left: 100px;	
+		}	
+		#header-menu-button, #status-menu .status-button.on {	
+			cursor: default;	
+			font-weight: 700;	
+			text-decoration: none;	
+		}	
+		#status-menu .status-button::after {	
+			background: none;	
+		}	
+		#status-menu .status-button.on::after {	
+			background: none;	
+			left: calc(50% - 20px);	
+			bottom: -19px;	
+			width: 0;	
+			height: 0;	
+			border-left: 20px solid transparent;	
+			border-right: 20px solid transparent;	
+		}	
+		#status-menu .search-container {	
+			top: -475px;	
+			right: 20px;	
+		}	
+		#status-menu #search-box {	
+			width: 150px;	
+			height: auto;	
+		}	
+		#search-box input {	
+			background: white 3px 50%/20px no-repeat url(https://image.myanimelist.net/ui/ueQLRyZL_yQZxD14iYLZC_gLr-mtem_jVqxnLpUY6LHlp_sr_ZwRrhNpbh7nV5sCeo7Sp3-sdxOAu1kTqLeHfW7i3YHTvUNvkDS5qKJPeIQyZ4XG2BGDzLdXX1QvKlrJ);	
+			font: 300 11px Open Sans;	
+			color: #999;	
+			padding: 4px 12px 6px 25px;	
+			border: 1px solid #ddd;	
+			border-radius: 10px;	
+		}	
+		.list-block, .status-menu-container.fixed + div.list-block {	
+			margin-top: 30px;	
+			min-height: 0;	
+		}	
+		.list-unit {	
+			width: 80%;	
+		}	
+		.list-unit .list-status-title {	
+			display: inline-block;	
+			width: calc(100% - 30px);	
+			height: 0;	
+			background: none;	
+			text-align: right;	
+			margin: auto;	
+		}	
+	.list-unit .list-status-title .stats {		
+				height: 0;		
+				line-height: 100%;		
+				top: 128px !important;		
+				left: 900px !important;	
+				position: relative;	
+				color: black !important;	
+			}	
+		.list-unit .list-stats {	
+			position: absolute;	
+			display: block;	
+			bottom: 0px;	
+			width: 80%;	
+			height: auto;	
+			background: none;	
+			font: normal 11px Open Sans;	
+			color: #777;	
+			text-transform: uppercase;	
+		}	
+	.list-table .list-table-header .header-title .link.sort {		
+				font-weight: normal;		
+				color: #999;		
+				text-transform: uppercase;		
+				padding: 4px 6px;		
+				z-index: 1;		
+			}	
+		.list-table > tbody:nth-of-type(2n+1):first-of-type {	
+			display: block;	
+			Width: 100%;	
+			height: auto;	
+			margin: 20px;	
+			background: none;	
+			text-transform: uppercase;	
+			z-index: 3;	
+		}	
+		.list-table-header {	
+			display: inline-block;	
+			width: 100%;	
+		}	
+		.list-table-header:before {	
+			content: 'Sort by:';	
+			position: relative;	
+			top: 2px;	
+			margin-right: 12px;	
+		}	
+		.list-table .list-table-header .header-title {	
+			display: inline-block;	
+			width: auto !important;	
+			height: auto;	
+			background: none;	
+			border: 0;	
+			padding: 0 !important;	
+			margin: 0 15px;	
+		}	
+		.list-table .list-table-header .header-title .link.sort:hover, #advanced-options-button:hover {	
+			color: #999;	
+		}	
+		.list-table .list-table-header .header-title .sort-icon {	
+			color: rgba(239,133,119,.65);	
+			font-size: 18px;	
+			position: relative;	
+			line-height: 0;	
+		}	
+		.fa-sort-asc {	
+			top: 6px;	
+		}	
+		.fa-sort-desc {	
+			top: -2px;	
+		}	
+		.fa-plus-circle::before {	
+			content: '+' !important;	
+			margin-left: 1px;	
+		}	
+		.list-table {	
+			border: 0;	
+			text-align: center;	
+		}	
+		.list-item, .list-table > tbody:nth-of-type(2n+1):not(:first-child) {	
+			width: 200px;	
+			height: 290px;	
+			display: inline-block;	
+			background: none;	
+			margin: 15px;	
+		}	
+		.list-table .list-table-data .data {	
+			position: absolute;	
+			width: 200px;	
+			height: 280px;	
+			border: 0;	
+			padding: 0;	
+		}	
+			
+		.list-table .list-table-data .data.finished,.list-table .list-table-data .data.started,.list-table .list-table-data .data.storage,.list-table .list-table-data .data.airing-finished,.list-table .list-table-data .data.airing-started,.list-table .list-table-data .data.rated ,.list-table .list-table-data .data.licensor,.list-table .list-table-data .data.season,.list-table .list-table-data .data.studio,.list-table .list-table-data .data.title .link,.list-table .list-table-data .data.progress,.list-table .list-table-data .data.type,.list-table .list-table-data .data .edit a:after,.list-table .list-table-data .data.title span,.list-table .list-table-data .data.season,.list-table .list-ta
