@@ -25,10 +25,17 @@ header {
   text-align: center;
 }
 
-header h1 {
-  margin-bottom: 10px;
-  font-size: 2.5rem;
-  color: #00aaff;
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  height: 50px;
 }
 
 nav ul {
@@ -47,7 +54,8 @@ nav ul li a {
   transition: color 0.3s ease;
 }
 
-nav ul li a:hover {
+nav ul li a:hover,
+nav ul li a.active {
   color: #00aaff;
 }
 
@@ -125,13 +133,24 @@ footer {
 
 /* استجابة الموبايل */
 @media (max-width: 767px) {
-  header h1 {
-    font-size: 1.8rem;
+  .header-container {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .logo {
+    height: 40px;
   }
 
   nav ul {
     flex-direction: column;
     gap: 10px;
+    align-items: center;
+  }
+
+  .banner {
+    max-width: 95%;
+    padding: 20px 15px;
   }
 
   .cards {
@@ -143,8 +162,11 @@ footer {
     width: 90%;
   }
 
-  .banner {
-    max-width: 95%;
-    padding: 20px 15px;
+  .banner h2 {
+    font-size: 1.5rem;
   }
+
+  .banner p {
+    font-size: 1rem;
   }
+}
