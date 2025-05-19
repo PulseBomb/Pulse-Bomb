@@ -103,7 +103,47 @@ section h2 {
   border-left: 5px solid #f72585;
   padding-left: 15px;
 }
+#comments-section {
+  max-width: 600px;
+  margin: 30px auto;
+  background: #161b22;
+  padding: 20px;
+  border-radius: 10px;
+  color: #c9d1d9;
+  font-family: 'Arial', sans-serif;
+}
 
+#comment-form input, #comment-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+}
+
+#comment-form button {
+  padding: 10px 20px;
+  background-color: #58a6ff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+#comment-form button:hover {
+  background-color: #3b7dd8;
+}
+
+.comment {
+  background-color: #0d1117;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 5px #58a6ff;
+}
 /* Cards */
 article {
   background: #111827;
