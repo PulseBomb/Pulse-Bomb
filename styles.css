@@ -46,7 +46,11 @@ nav a {
   position: relative;
   transition: color 0.3s ease;
 }
-
+.post img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 nav a:hover,
 nav a.active {
   color: #66ccff;
