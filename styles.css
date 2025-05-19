@@ -22,12 +22,6 @@ body {
     line-height: 1.6;
 }
 
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
 /* Header Styles */
 .header {
     background: rgba(15, 15, 19, 0.9);
@@ -95,9 +89,10 @@ body {
 
 /* Hero Section */
 .hero {
-    height: 60vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-                url('https://i.postimg.cc/50cChtkj/5389ec4f73cc58d737c48d55528e9dc2.jpg') no-repeat center center/cover;
+    height: 70vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                url('https://i.postimg.cc/3JhZtL98/image.jpg') no-repeat center center/cover;
+    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -200,29 +195,6 @@ body {
     color: white;
 }
 
-/* Comments Section */
-.comments-section {
-    margin: 3rem 0;
-}
-
-.section-title {
-    font-family: 'Orbitron', sans-serif;
-    color: var(--secondary);
-    margin-bottom: 1.5rem;
-    position: relative;
-    padding-bottom: 0.5rem;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 50px;
-    height: 2px;
-    background: var(--primary);
-}
-
 /* Footer */
 .footer {
     background: var(--darker);
@@ -246,4 +218,9 @@ body {
     .hero-content h2 {
         font-size: 2rem;
     }
-  }
+    
+    .content-card {
+        width: 100%;
+        height: auto;
+    }
+}
