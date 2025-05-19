@@ -370,6 +370,14 @@
     &copy; 2025 Pulse Bomb. All rights reserved.
   </footer> 
 <script src="reactions.js"></script>
+    <script>
+  window.addEventListener('load', () => {
+    const commentsSection = document.getElementById('comments-section');
+    if (commentsSection) {
+      document.body.appendChild(commentsSection); // ينقل العنصر ليكون آخر شيء في <body>
+    }
+  });
+    </script>
     </body>
     
 </html>
