@@ -158,15 +158,16 @@
       <!-- مقالات قادمة -->
     </section>
 
-    <section id="comments-section" style="max-width: 800px; margin: 40px auto; color: #fff;">
+    <!-- قسم التعليقات -->
+<section id="comments-section" style="max-width: 800px; margin: 40px auto; color: #fff;">
   <h2>Comments</h2>
-  
+
   <form id="comment-form" style="margin-bottom: 20px;">
     <input type="text" id="username" placeholder="Your name" required style="padding: 8px; width: 30%; margin-right: 10px;">
     <input type="text" id="comment" placeholder="Your comment" required style="padding: 8px; width: 50%; margin-right: 10px;">
     <button type="submit" style="padding: 8px;">Post</button>
   </form>
-  
+
   <div id="comments-list" style="background:#222; padding: 15px; border-radius: 8px; max-height: 400px; overflow-y: auto;">
     <!-- التعليقات هنا هتظهر -->
   </div>
@@ -175,7 +176,6 @@
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 <script>
-  // Your web app's Firebase configuration (غيرهم بالمعلومات الخاصة بك)
   const firebaseConfig = {
     apiKey: "AIzaSyBdr8mcODakhdOoJqRjnUALoPuO8ORBGDE",
     authDomain: "kat0-ba66c.firebaseapp.com",
@@ -187,24 +187,34 @@
     measurementId: "G-C6QDGB1Q5N"
   };
 
-  // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
   const commentForm = document.getElementById('comment-form');
   const commentsList = document.getElementById('comments-list');
 
-  // تحميل التعليقات من Firebase وعرضها
   function loadComments() {
     db.ref('comments').on('value', snapshot => {
-      commentsList.innerHTML = ''; // فرغ القائمة
+      commentsList.innerHTML = '';
       const comments = snapshot.val();
-      if(comments) {
+      if (comments) {
         Object.values(comments).forEach(comment => {
           const div = document.createElement('div');
           div.style.borderBottom = "1px solid #444";
           div.style.padding = "10px 0";
-          div.innerHTML = `<strong>${escapeHTML(comment.username)}</strong>: ${escapeHTML(comment.text)}`;
+
+          const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(comment.username)}&background=0D8ABC&color=fff&size=64`;
+
+          div.innerHTML = `
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <img src="${avatarUrl}" alt="avatar" style="width: 48px; height: 48px; border-radius: 50%;">
+              <div>
+                <div style="font-weight: bold; font-size: 16px; color: #00aaff;">${escapeHTML(comment.username)}</div>
+                <div style="margin: 4px 0; font-size: 15px; color: #ddd;">${escapeHTML(comment.text)}</div>
+              </div>
+            </div>
+          `;
+
           commentsList.appendChild(div);
         });
       } else {
@@ -213,27 +223,24 @@
     });
   }
 
-  // إرسال تعليق جديد لـ Firebase
   commentForm.addEventListener('submit', e => {
     e.preventDefault();
     const username = commentForm.username.value.trim();
     const text = commentForm.comment.value.trim();
-    if(username && text) {
+    if (username && text) {
       db.ref('comments').push({ username, text });
       commentForm.reset();
     }
   });
 
-  // دالة بسيطة لحماية من XSS
   function escapeHTML(str) {
-    return str.replace(/[&<>"']/g, function(m) {
-      return {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[m];
+    return str.replace(/[&<>"']/g, function (m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
     });
   }
 
   loadComments();
-      </script>
-
+</script>
   <!-- باقي محتوى الصفحة -->
 
   <div id="view-count" style="font-size: 24px; display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px;">
@@ -254,12 +261,7 @@
       });
   </script>
 
-  <!-- الفوتر -->
-  <footer style="width: 100%; text-align: center; padding: 10px 0; position: fixed; bottom: 0; background: #222; color: #fff;">
-    &copy; 2025 Pulse Bomb. All rights reserved.
-  </footer>
 
-</body>
   <!-- حاجات الصفحة -->
 
   <footer>
