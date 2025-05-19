@@ -2,29 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pulse Bomb</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- Hero Banner with Background -->
-  <section class="hero" style="background-image: url('https://i.postimg.cc/3JhZtL98/image.jpg');">
-    <div class="container hero-content">
-      <img src="https://i.postimg.cc/BnJZWnT2/1000012716-removebg-preview.png" alt="Logo" class="logo" />
+  <header>
+    <div class="container">
+      <img src="https://i.postimg.cc/BnJZWnT2/1000012716-removebg-preview.png" alt="Pulse Bomb Logo" class="logo" />
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="anime.html">Anime News</a></li>
+          <li><a href="games.html">Game News</a></li>
+          <li><a href="whatif.html">What If</a></li>
+        </ul>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <!-- Navigation Boxes -->
-  <section class="nav-boxes container">
-    <div class="nav-grid">
-      <a href="index.html" class="nav-box">Home</a>
-      <a href="anime.html" class="nav-box">Anime News</a>
-      <a href="games.html" class="nav-box">Game News</a>
-      <a href="whatif.html" class="nav-box">What If</a>
-    </div>
-  </section>
+  <div class="banner">
+    <div class="banner-text">Welcome to Pulse Bomb</div>
+  </div>
+
+  <main>
+    <section>
+      <h2>Latest Updates</h2>
+
+      <article>
+        <h3>New Anime Announcement</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <img src="https://i.postimg.cc/PrGcXW7D/anime.jpg" alt="Anime News">
+        <div class="reaction">
+          <img src="https://i.postimg.cc/BQFjHdHG/like-default.png" data-default="https://i.postimg.cc/BQFjHdHG/like-default.png" data-active="https://i.postimg.cc/FKy4wmSH/like-active.png" class="reaction-img" onclick="toggleLike(this)">
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  
+
+  <script>
+    function toggleLike(img) {
+      const isActive = img.src === img.dataset.active;
+      img.src = isActive ? img.dataset.default : img.dataset.active;
+    }
+  </script>
+</body>
+</html>
 
 
 
