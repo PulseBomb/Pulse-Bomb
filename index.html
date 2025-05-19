@@ -109,7 +109,191 @@
     });
 </script>
 
+<section id="comments-section" style="max-width: 800px; margin: 40px auto; color: #fff;">
+  <h2>Comments</h2>
 
+  <form id="comment-form" style="margin-bottom: 20px;">
+    <input type="text" id="username" placeholder="Your name" required style="padding: 8px; width: 30%; margin-right: 10px;">
+    <input type="text" id="comment" placeholder="Your comment" required style="padding: 8px; width: 50%; margin-right: 10px;">
+    <button type="submit" style="padding: 8px;">Post</button>
+  </form>
+
+  <div id="comments-list" style="background:#222; padding: 15px; border-radius: 8px; max-height: 400px; overflow-y: auto;">
+    <!-- التعليقات هنا هتظهر -->
+  </div>
+</section>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBdr8mcODakhdOoJqRjnUALoPuO8ORBGDE",
+    authDomain: "kat0-ba66c.firebaseapp.com",
+    databaseURL: "https://kat0-ba66c-default-rtdb.firebaseio.com",
+    projectId: "kat0-ba66c",
+    storageBucket: "kat0-ba66c.firebasestorage.app",
+    messagingSenderId: "216688927261",
+    appId: "1:216688927261:web:d71f654adc73d2074f5cf4",
+    measurementId: "G-C6QDGB1Q5N"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  const commentForm = document.getElementById('comment-form');
+  const commentsList = document.getElementById('comments-list');
+
+  // تحميل وعرض التعليقات
+  function loadComments() {
+    db.ref('comments').on('value', snapshot => {
+      commentsList.innerHTML = '';
+      const comments = snapshot.val();
+      if (comments) {
+        Object.entries(comments).forEach(([key, comment]) => {
+          const div = document.createElement('div');
+          div.style.borderBottom = "1px solid #444";
+          div.style.padding = "10px 0";
+
+          const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(comment.username)}&background=0D8ABC&color=fff&size=64`;
+
+          // بناء ردود التعليقات (لو فيه)
+          let repliesHtml = '';
+          if(comment.replies) {
+            Object.entries(comment.replies).forEach(([rKey, reply]) => {
+              repliesHtml += `
+                <div style="margin-left: 50px; margin-top: 8px; padding: 8px; background:#333; border-radius: 6px;">
+                  <strong style="color:#00aaff;">${escapeHTML(reply.username)}</strong>: ${escapeHTML(reply.text)}
+                </div>`;
+            });
+          }
+
+          // اعجاب (Like) وعداد اللايكات
+          const likeCount = comment.likes ? Object.keys(comment.likes).length : 0;
+
+          div.innerHTML = `
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <img src="${avatarUrl}" alt="avatar" style="width: 48px; height: 48px; border-radius: 50%;">
+              <div style="flex: 1;">
+                <div style="font-weight: bold; font-size: 16px; color: #00aaff;">${escapeHTML(comment.username)}</div>
+                <div style="margin: 4px 0; font-size: 15px; color: #ddd;">${escapeHTML(comment.text)}</div>
+                
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="reaction" data-id="${key}" style="margin-top:10px; cursor:pointer; user-select:none;">
+                    <img
+                      src="https://i.postimg.cc/sDzKyKfC/1000012794-removebg-preview.png"
+                      class="reaction-img"
+                      data-default="https://i.postimg.cc/sDzKyKfC/1000012794-removebg-preview.png"
+                      data-active="https://i.postimg.cc/XJDxn0v2/1000012790-removebg-preview.png"
+                      alt="Like button"
+                      style="width:30px;"
+                    />
+                    <span id="count-${key}" style="margin-left:8px; font-weight:bold;">${likeCount}</span>
+                  </div>
+
+                  <button onclick="showReplyForm('${key}')" style="background:#00aaff; border:none; padding:4px 8px; color:#fff; border-radius:4px; cursor:pointer;">Reply</button>
+                </div>
+
+                <div id="reply-form-${key}" style="display:none; margin-top:10px;">
+                  <input type="text" id="reply-username-${key}" placeholder="Your name" style="padding: 6px; width: 120px; margin-right: 10px;">
+                  <input type="text" id="reply-text-${key}" placeholder="Your reply" style="padding: 6px; width: 300px; margin-right: 10px;">
+                  <button onclick="postReply('${key}')" style="padding: 6px 12px; background:#00aaff; color:#fff; border:none; border-radius:4px; cursor:pointer;">Send</button>
+                  <button onclick="hideReplyForm('${key}')" style="padding: 6px 12px; background:#444; color:#fff; border:none; border-radius:4px; cursor:pointer;">Cancel</button>
+                </div>
+
+                ${repliesHtml}
+              </div>
+            </div>
+          `;
+
+          commentsList.appendChild(div);
+
+          // ضبط حالة اللايك (لو المستخدم حب يكرر العملية احنا بنسويها بشكل أبسط هينا)
+          const reactionDiv = div.querySelector('.reaction');
+          const img = reactionDiv.querySelector('img');
+          const span = reactionDiv.querySelector('span');
+
+          reactionDiv.onclick = () => {
+            const userId = getUserId(); // هتحتاج تعرف اسم أو معرف المستخدم لتخزين اللايكات بشكل دقيق
+            if(!userId) return alert('Please enter your name to like.');
+
+            // ضبط المسار للايك في Firebase
+            const likeRef = db.ref(`comments/${key}/likes/${userId}`);
+
+            likeRef.once('value').then(snapshot => {
+              if(snapshot.exists()) {
+                likeRef.remove();
+                span.textContent = parseInt(span.textContent) - 1;
+                img.src = img.dataset.default;
+              } else {
+                likeRef.set(true);
+                span.textContent = parseInt(span.textContent) + 1;
+                img.src = img.dataset.active;
+              }
+            });
+          };
+        });
+      } else {
+        commentsList.innerHTML = '<p>No comments yet.</p>';
+      }
+    });
+  }
+
+  // عرض فورم الرد
+  function showReplyForm(commentId) {
+    document.getElementById(`reply-form-${commentId}`).style.display = 'block';
+  }
+
+  // إخفاء فورم الرد
+  function hideReplyForm(commentId) {
+    document.getElementById(`reply-form-${commentId}`).style.display = 'none';
+  }
+
+  // إرسال رد جديد
+  function postReply(commentId) {
+    const usernameInput = document.getElementById(`reply-username-${commentId}`);
+    const textInput = document.getElementById(`reply-text-${commentId}`);
+
+    const username = usernameInput.value.trim();
+    const text = textInput.value.trim();
+
+    if(!username || !text) {
+      alert('Please enter your name and reply text.');
+      return;
+    }
+
+    const repliesRef = db.ref(`comments/${commentId}/replies`);
+    repliesRef.push({ username, text })
+      .then(() => {
+        usernameInput.value = '';
+        textInput.value = '';
+        hideReplyForm(commentId);
+      });
+  }
+
+  // إرسال تعليق جديد
+  commentForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const username = document.getElementById('username').value.trim();
+    const text = document.getElementById('comment').value.trim();
+    if(username && text) {
+      db.ref('comments').push({ username, text });
+      commentForm.reset();
+    }
+  });
+
+  // دالة هروب من XSS
+  function escapeHTML(str) {
+    return str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
+  }
+
+  // دالة مؤقتة لجلب اسم المستخدم للايك (ممكن تعدلها حسب حاجتك)
+  function getUserId() {
+    const username = document.getElementById('username').value.trim();
+    return username ? username.replace(/\s+/g, '_').toLowerCase() : null;
+  }
+
+  loadComments();
+</script>
        <section>
   <h2>Latest Anime  News</h2>
   <h2>Naruto Launches Cooking Channel: “Ramen no Jutsu” Goes Viral <img src="https://i.postimg.cc/SKfqpjYr/1000012771-removebg-preview.png" alt="emoji" style="width:45px; height:45px; vertical-align: text-bottom; margin-left: 10px;"> </h2>
@@ -158,89 +342,7 @@
       <!-- مقالات قادمة -->
     </section>
 
-    <!-- قسم التعليقات -->
-<section id="comments-section" style="max-width: 800px; margin: 40px auto; color: #fff;">
-  <h2>Comments</h2>
-
-  <form id="comment-form" style="margin-bottom: 20px;">
-    <input type="text" id="username" placeholder="Your name" required style="padding: 8px; width: 30%; margin-right: 10px;">
-    <input type="text" id="comment" placeholder="Your comment" required style="padding: 8px; width: 50%; margin-right: 10px;">
-    <button type="submit" style="padding: 8px;">Post</button>
-  </form>
-
-  <div id="comments-list" style="background:#222; padding: 15px; border-radius: 8px; max-height: 400px; overflow-y: auto;">
-    <!-- التعليقات هنا هتظهر -->
-  </div>
-</section>
-
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyBdr8mcODakhdOoJqRjnUALoPuO8ORBGDE",
-    authDomain: "kat0-ba66c.firebaseapp.com",
-    databaseURL: "https://kat0-ba66c-default-rtdb.firebaseio.com",
-    projectId: "kat0-ba66c",
-    storageBucket: "kat0-ba66c.firebasestorage.app",
-    messagingSenderId: "216688927261",
-    appId: "1:216688927261:web:d71f654adc73d2074f5cf4",
-    measurementId: "G-C6QDGB1Q5N"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
-
-  const commentForm = document.getElementById('comment-form');
-  const commentsList = document.getElementById('comments-list');
-
-  function loadComments() {
-    db.ref('comments').on('value', snapshot => {
-      commentsList.innerHTML = '';
-      const comments = snapshot.val();
-      if (comments) {
-        Object.values(comments).forEach(comment => {
-          const div = document.createElement('div');
-          div.style.borderBottom = "1px solid #444";
-          div.style.padding = "10px 0";
-
-          const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(comment.username)}&background=0D8ABC&color=fff&size=64`;
-
-          div.innerHTML = `
-            <div style="display: flex; gap: 10px; align-items: center;">
-              <img src="${avatarUrl}" alt="avatar" style="width: 48px; height: 48px; border-radius: 50%;">
-              <div>
-                <div style="font-weight: bold; font-size: 16px; color: #00aaff;">${escapeHTML(comment.username)}</div>
-                <div style="margin: 4px 0; font-size: 15px; color: #ddd;">${escapeHTML(comment.text)}</div>
-              </div>
-            </div>
-          `;
-
-          commentsList.appendChild(div);
-        });
-      } else {
-        commentsList.innerHTML = '<p>No comments yet.</p>';
-      }
-    });
-  }
-
-  commentForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const username = commentForm.username.value.trim();
-    const text = commentForm.comment.value.trim();
-    if (username && text) {
-      db.ref('comments').push({ username, text });
-      commentForm.reset();
-    }
-  });
-
-  function escapeHTML(str) {
-    return str.replace(/[&<>"']/g, function (m) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
-    });
-  }
-
-  loadComments();
-</script>
+    
   <!-- باقي محتوى الصفحة -->
 
   <div id="view-count" style="font-size: 24px; display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px;">
