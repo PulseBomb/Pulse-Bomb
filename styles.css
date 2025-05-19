@@ -1,97 +1,156 @@
-/* تم حذف استيراد الصور الثقيلة */
+/* خطوط وألوان */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
 :root {
-  --main-bg: #0a0a0a;
-  --accent: #0077ff;
-  --text-color: #f0f0f0;
-  --card-bg: #111;
+  --primary-color: #0077ff;
+  --secondary-color: #00d1ff;
+  --bg-dark: #0a0f1a;
+  --text-light: #f0f4ff;
+  --accent-color: #00fff7;
+  --shadow-color: rgba(0, 119, 255, 0.5);
 }
 
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+  font-family: 'Orbitron', sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* خلفية الموقع */
 body {
-  background: var(--main-bg);
-  color: var(--text-color);
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-/* ترويسة */
-header {
-  background: var(--card-bg);
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-}
-
-header h1 {
-  margin: 0;
-  color: var(--accent);
-  font-size: 2rem;
-}
-
-/* شريط التنقل */
-nav {
+  background: linear-gradient(135deg, var(--bg-dark) 0%, #020417 100%);
+  color: var(--text-light);
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  background: #0e0e0e;
-  padding: 0.5rem;
+  flex-direction: column;
 }
 
-nav a {
-  color: var(--text-color);
+/* الهيدر */
+header {
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  box-shadow: 0 4px 10px var(--shadow-color);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 60px;
+  filter: drop-shadow(0 0 6px var(--accent-color));
+}
+
+/* قائمة التنقل */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+nav ul li a {
   text-decoration: none;
-  margin: 0 1rem;
-  transition: color 0.3s;
+  color: var(--text-light);
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px transparent;
+  position: relative;
+  overflow: hidden;
 }
 
-nav a:hover {
-  color: var(--accent);
+nav ul li a.active,
+nav ul li a:hover {
+  background: var(--accent-color);
+  color: #000;
+  box-shadow: 0 0 15px var(--accent-color);
+  transform: scale(1.05);
+  cursor: pointer;
 }
 
-/* بانر */
-.banner {
-  background-image: url("https://i.postimg.cc/2jwvNF8s/image.jpg");
-  background-size: cover;
-  background-position: center;
-  padding: 4rem 1rem;
-  text-align: center;
-  color: white;
-  font-size: 1.8rem;
-  font-weight: bold;
+nav ul li a::before {
+  content: '';
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--secondary-color);
+  transition: 0.4s ease;
+  z-index: -1;
 }
 
-/* المقالات */
+nav ul li a:hover::before {
+  left: 0;
+}
+
+/* محتوى الصفحة */
 main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
+  flex-grow: 1;
+  padding: 2rem 4rem;
+  max-width: 1200px;
+  margin: auto;
+  background: rgba(10, 15, 26, 0.85);
+  border-radius: 20px;
+  box-shadow: 0 0 40px var(--shadow-color);
 }
 
-.card {
-  background: var(--card-bg);
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  transition: transform 0.3s;
+/* عناوين */
+h1, h2, h3 {
+  margin-bottom: 1rem;
+  text-shadow: 0 0 8px var(--accent-color);
 }
 
-.card:hover {
-  transform: translateY(-5px);
+/* أزرار */
+button {
+  background: var(--primary-color);
+  border: none;
+  padding: 12px 24px;
+  color: var(--text-light);
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 0 20px var(--primary-color);
+  transition: background 0.3s ease;
 }
 
-/* الفوتر */
+button:hover {
+  background: var(--secondary-color);
+  box-shadow: 0 0 25px var(--secondary-color);
+  transform: scale(1.05);
+}
+
+/* فوتر */
 footer {
-  background: #0e0e0e;
-  padding: 1rem;
   text-align: center;
+  padding: 1rem 0;
+  background: #020417;
+  color: var(--text-light);
   font-size: 0.9rem;
-  color: #888;
+  letter-spacing: 1.2px;
+  box-shadow: 0 -3px 10px var(--shadow-color);
 }
 
-/* responsive adjustments */
-@media (max-width: 600px) {
-  .banner {
-    font-size: 1.2rem;
-    padding: 2rem 1rem;
+/* تجاوب موبايل */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  main {
+    padding: 1rem 2rem;
+    border-radius: 12px;
+  }
+  .logo {
+    height: 50px;
   }
 }
