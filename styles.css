@@ -1,4 +1,4 @@
-/* Reset بسيط */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -6,164 +6,71 @@
 }
 
 body {
-  background-color: #0d0d0d;
   font-family: 'Poppins', sans-serif;
-  color: #fff;
-  line-height: 1.6;
+  background-color: #121212;
+  color: #eee;
 }
 
-/* الهيدر الكبير */
-.hero-header {
+/* الهيدر مع صورة الخلفية */
+header.hero-header {
   position: relative;
-  width: 100%;
-  height: 60vh;
-  background: url('https://i.postimg.cc/Hng7GtZ2/image.jpg') no-repeat center center/cover;
+  height: 300px;
+  background: url('https://i.postimg.cc/Hng7GtZ2/image.jpg') center/cover no-repeat;
   display: flex;
-  justify-content: center;
+  align-items: flex-start;
+  padding: 20px 40px;
+}
+
+/* صندوق القوائم فوق الصورة */
+nav.navbar {
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  padding: 8px 25px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.7);
+  display: flex;
   align-items: center;
-  overflow: hidden;
+  gap: 35px;
+  max-width: 900px;
+  width: 100%;
 }
 
-.hero-header img.logo {
-  max-width: 250px;
+/* الشعار */
+nav.navbar .logo {
+  width: 60px;
   height: auto;
-  z-index: 2;
+  flex-shrink: 0;
 }
 
-/* تأثير غامق فوق الخلفية */
-.hero-header::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(10, 10, 10, 0.6);
-  z-index: 1;
-}
-/* قسم الأخبار */
-.news-section {
-  max-width: 1200px;
-  margin: 50px auto;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-}
-
-/* كارت خبر */
-.news-card {
-  background-color: #1a1a1a;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* قوائم التنقل */
+nav.navbar ul.nav-links {
+  list-style: none;
   display: flex;
-  flex-direction: column;
-}
-
-.news-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(0, 188, 212, 0.3);
-}
-
-.news-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.news-card .content {
-  padding: 15px 20px;
+  gap: 30px;
   flex-grow: 1;
 }
 
-.news-card .title {
+nav.navbar ul.nav-links li a {
+  color: #ddd;
+  text-decoration: none;
+  font-weight: 600;
   font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #00bcd4;
-}
-
-.news-card .date {
-  font-size: 13px;
-  color: #888;
-  margin-bottom: 10px;
-}
-
-.news-card .description {
-  font-size: 15px;
-  color: #ccc;
-  margin-bottom: 15px;
-}
-
-.news-card .read-more {
-  align-self: flex-start;
-  background-color: transparent;
-  border: 1px solid #00bcd4;
-  color: #00bcd4;
-  padding: 6px 14px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 14px;
+  padding: 10px 15px;
+  border-radius: 6px;
   transition: all 0.3s ease;
-}
-
-.news-card .read-more:hover {
-  background-color: #00bcd4;
-  color: #000;
-}
-/* النافبار */
-.navbar {
-  width: 100%;
-  background: rgba(20, 20, 20, 0.85);
-  backdrop-filter: blur(10px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  padding: 15px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 40px;
-}
-
-.nav-links li a {
-  text-decoration: none;
-  color: #ccc;
-  font-size: 17px;
-  letter-spacing: 0.5px;
   position: relative;
-  transition: color 0.3s ease;
-  padding: 6px 10px;
 }
 
-.nav-links li a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  background: #00bcd4;
-  bottom: 0;
-  left: 0;
-  transition: width 0.3s ease;
+/* تأثير عند المرور */
+nav.navbar ul.nav-links li a:hover,
+nav.navbar ul.nav-links li a.active {
+  background-color: #00bcd4;
+  color: #121212;
+  box-shadow: 0 4px 15px #00bcd4;
 }
 
-.nav-links li a:hover {
-  color: #00bcd4;
+/* تأثير عند الضغط */
+nav.navbar ul.nav-links li a:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px #0097a7;
 }
-
-.nav-links li a:hover::after {
-  width: 100%;
-}
-
-.nav-links li a.active {
-  color: #00bcd4;
-  font-weight: bold;
-      }
