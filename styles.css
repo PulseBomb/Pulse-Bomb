@@ -25,7 +25,21 @@ header {
   overflow: hidden;
   z-index: 1000;
 }
+header .header-bg {
+  width: 100%;
+  height: 250px; /* ارتفاع مناسب للهيدر */
+  object-fit: cover; /* تخلي الصورة تغطي المساحة بدون تشويه */
+  display: block;
+}
 
+.post-image {
+  width: 100%;
+  max-width: 400px; /* تحكم في أقصى عرض لصورة المنشور */
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
 .header-overlay {
   position: relative;
   height: 100%;
