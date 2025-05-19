@@ -1,240 +1,150 @@
-/* styles.css */
+/* أساسي */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Orbitron', sans-serif;
-  direction: rtl;
-  color: #fff;
 }
 
 body {
-  background-color: #121212;
-  line-height: 1.5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0b0c10;
+  color: #e0e0e0;
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-image: url(https://myanimelist.cdn-dena.com/images/userimages/17984403.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
 }
 
+/* الهيدر */
 header {
-  background-color: #1a1a1a;
-  padding: 10px 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.8);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  background: rgba(15, 23, 42, 0.9);
+  padding: 20px;
+  text-align: center;
 }
 
-.header-container {
-  max-width: 1200px;
-  margin: auto;
+header h1 {
+  margin-bottom: 10px;
+  font-size: 2.5rem;
+  color: #00aaff;
+}
+
+nav ul {
+  list-style: none;
   display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.logo {
-  height: 40px;
-  cursor: pointer;
-}
-
-nav {
-  background-color: #1f1f1f;
-  padding: 10px 15px;
-  border: 1px solid #333;
-  display: flex;
+  justify-content: center;
   gap: 25px;
-  flex-grow: 1;
-  border-radius: 0;
-  box-shadow: 0 2px 5px rgba(75, 0, 130, 0.4);
+  flex-wrap: wrap;
 }
 
-nav a {
-  color: #00bcd4;
+nav ul li a {
+  color: #a1cfff;
   text-decoration: none;
   font-weight: 600;
-  padding: 8px 12px;
-  transition: all 0.3s ease;
-  user-select: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
 }
 
-nav a:hover,
-nav a.active {
-  background-color: rgba(0, 188, 212, 0.2);
-  color: #004d58;
-  transform: scale(1.1);
-  box-shadow: 0 0 8px rgba(0, 188, 212, 0.6);
-  border-radius: 0;
+nav ul li a:hover {
+  color: #00aaff;
 }
 
-main {
-  max-width: 1200px;
-  margin: 30px auto 50px;
-  padding: 0 20px;
+/* البانر */
+.banner {
+  background: rgba(0, 170, 255, 0.2);
+  margin: 30px auto;
+  max-width: 900px;
+  padding: 30px 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 10px #00aaffaa;
 }
 
-.main-news {
-  margin-bottom: 40px;
+.banner h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
 }
 
-.main-news-card {
-  position: relative;
-  height: 350px;
+.banner p {
+  font-size: 1.2rem;
+  color: #c0e8ff;
+}
+
+/* الكاردات */
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 20px auto 50px;
+  padding: 0 10px;
+}
+
+.card {
+  background: rgba(15, 23, 42, 0.8);
   border-radius: 12px;
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 6px 15px rgba(98, 0, 255, 0.5);
-  cursor: pointer;
+  box-shadow: 0 4px 10px #003e6b;
+  width: 300px;
+  padding: 15px;
   transition: transform 0.3s ease;
 }
 
-.main-news-card:hover {
-  transform: scale(1.03);
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 15px #00aaff;
 }
 
-.main-news-card .overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(50,0,100,0.7), rgba(10,10,10,0.9));
-  z-index: 1;
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 12px;
 }
 
-.main-news-content {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  z-index: 2;
-  max-width: 70%;
-}
-
-.main-news-content h1 {
-  font-size: 2.4rem;
+.card h3 {
+  color: #00aaff;
   margin-bottom: 10px;
-  color: #ddd;
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+  font-size: 1.4rem;
 }
 
-.main-news-content p {
-  color: #bbb;
-  margin-bottom: 15px;
-  font-size: 1.1rem;
-}
-
-.read-more-btn {
-  display: inline-block;
-  padding: 8px 20px;
-  background-color: #00bcd4;
-  color: #121212;
-  font-weight: 700;
-  border-radius: 5px;
-  text-decoration: none;
-  box-shadow: 0 0 8px #00bcd4;
-  transition: background-color 0.3s ease;
-}
-
-.read-more-btn:hover {
-  background-color: #0097a7;
-  box-shadow: 0 0 12px #0097a7;
-}
-
-.news-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-  gap: 25px;
-}
-
-.news-card {
-  position: relative;
-  height: 280px;
-  border-radius: 12px;
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 4px 12px rgba(98, 0, 255, 0.3);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.news-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(98, 0, 255, 0.7);
-}
-
-.news-card .overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(50,0,100,0.7), rgba(10,10,10,0.9));
-  z-index: 1;
-}
-
-.news-card h2 {
-  position: absolute;
-  bottom: 50px;
-  right: 15px;
-  margin: 0;
-  z-index: 2;
-  color: #eee;
-  font-size: 1.3rem;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-}
-
-.news-card p {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  margin: 0;
-  z-index: 2;
-  color: #ccc;
+.card p {
+  color: #c0d6e4;
   font-size: 1rem;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
 }
 
-/* Responsive */
+/* الفوتر */
+footer {
+  background: rgba(15, 23, 42, 0.9);
+  color: #666;
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 0.9rem;
+}
 
-@media (max-width: 768px) {
-  .header-container {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
+/* استجابة الموبايل */
+@media (max-width: 767px) {
+  header h1 {
+    font-size: 1.8rem;
   }
 
-  nav {
-    flex-grow: 1;
-    justify-content: center;
-    flex-wrap: wrap;
+  nav ul {
+    flex-direction: column;
     gap: 10px;
   }
 
-  nav a {
-    padding: 6px 10px;
-    font-size: 0.9rem;
+  .cards {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .main-news-content {
-    max-width: 100%;
-    bottom: 10px;
-    right: 10px;
+  .card {
+    width: 90%;
   }
 
-  .main-news-content h1 {
-    font-size: 1.6rem;
+  .banner {
+    max-width: 95%;
+    padding: 20px 15px;
   }
-
-  .main-news-content p {
-    font-size: 0.95rem;
   }
-
-  .news-card {
-    height: 220px;
-  }
-
-  .news-card h2 {
-    font-size: 1.1rem;
-    bottom: 45px;
-    right: 12px;
-  }
-
-  .news-card p {
-    font-size: 0.9rem;
-    bottom: 10px;
-    right: 12px;
-  }
-}
