@@ -50,6 +50,7 @@ nav.navbar ul.nav-links {
   flex-grow: 1;
 }
 
+/* روابط القوائم كلها شكل واحد */
 nav.navbar ul.nav-links li a {
   color: #ddd;
   text-decoration: none;
@@ -61,16 +62,45 @@ nav.navbar ul.nav-links li a {
   position: relative;
 }
 
-/* تأثير عند المرور */
+/* تأثير عند المرور أو الضغط */
 nav.navbar ul.nav-links li a:hover,
-nav.navbar ul.nav-links li a.active {
+nav.navbar ul.nav-links li a:active,
+nav.navbar ul.nav-links li a:focus {
   background-color: #00bcd4;
   color: #121212;
   box-shadow: 0 4px 15px #00bcd4;
+  outline: none;
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
 }
 
-/* تأثير عند الضغط */
-nav.navbar ul.nav-links li a:active {
-  transform: scale(0.95);
-  box-shadow: 0 2px 8px #0097a7;
+/* Responsive */
+@media (max-width: 768px) {
+  header.hero-header {
+    height: 200px;
+    padding: 15px 20px;
+  }
+
+  nav.navbar {
+    flex-wrap: wrap;
+    padding: 10px 15px;
+  }
+
+  nav.navbar .logo {
+    width: 50px;
+    margin-bottom: 10px;
+  }
+
+  nav.navbar ul.nav-links {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
+  nav.navbar ul.nav-links li a {
+    font-size: 16px;
+    padding: 12px;
+    text-align: center;
+    display: block;
+  }
 }
