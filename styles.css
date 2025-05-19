@@ -1,184 +1,103 @@
-<style>
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* styles.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #0f0f1b;
-  color: #e5e7eb;
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  overflow-x: hidden;
+  margin: 0;
+  background-color: #121212;
+  font-family: 'Orbitron', sans-serif;
+  color: #f5f5f5;
 }
 
-/* HEADER */
 header {
-  background: linear-gradient(to right, #111827, #1f2937);
-  padding: 15px 25px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  z-index: 100;
-}
-header img {
-  height: 50px;
-}
-nav {
-  display: flex;
+  padding: 15px 30px;
+  background-color: #181818;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.7);
   gap: 20px;
 }
-nav a {
-  color: #93c5fd;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
-}
-nav a:hover {
-  color: #60a5fa;
+
+header img {
+  height: 55px;
 }
 
-/* BANNER */
+nav {
+  display: flex;
+  gap: 25px;
+  flex-grow: 1;
+}
+
+nav a {
+  color: #bbb;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  position: relative;
+  padding: 5px 0;
+  transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+  color: #66ccff;
+}
+
+nav a.active::after,
+nav a:hover::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #66ccff;
+  border-radius: 2px;
+}
+
 .banner {
   background-image: url('https://i.postimg.cc/2jwvNF8s/image.jpg');
-  background-size: cover;
   background-position: center;
-  height: 320px;
-  margin: 20px;
-  border-radius: 16px;
-  position: relative;
-  box-shadow: 0 0 20px #2563eb88;
-}
-.banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  border-radius: 16px;
-}
-.banner-text {
-  position: absolute;
-  bottom: 25px;
-  left: 30px;
-  z-index: 1;
-  color: #fff;
-  font-size: 2.7rem;
-  font-weight: bold;
-  text-shadow: 0 0 10px #60a5fa;
-}
-
-/* MAIN */
-main {
-  flex: 1;
-  padding: 0 20px 40px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-section {
-  margin-top: 40px;
-}
-section h2 {
-  color: #60a5fa;
-  font-size: 2rem;
-  margin-bottom: 20px;
-  border-left: 4px solid #3b82f6;
-  padding-left: 12px;
-}
-
-/* ARTICLE CARD */
-article {
-  background: linear-gradient(145deg, #1e293b, #111827);
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-article:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(59,130,246,0.4);
-}
-article h3 {
-  color: #93c5fd;
-  margin-bottom: 10px;
-}
-article p {
-  color: #d1d5db;
-}
-
-/* ARTICLE IMAGE */
-article img:not(.reaction-img) {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-top: 10px;
-}
-
-/* REACTIONS */
-.reaction {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 250px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 12px;
-}
-.reaction-img {
-  width: 30px;
-  height: auto;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-.reaction-img:hover {
-  transform: scale(1.1);
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
-/* FOOTER */
-footer {
-  background: #111827;
+.banner-text {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+  text-shadow: 2px 2px 5px #000000cc;
   text-align: center;
-  padding: 20px;
-  color: #9ca3af;
-  font-size: 0.9rem;
-  margin-top: auto;
+  padding: 0 20px;
+  max-width: 90%;
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   header {
     flex-direction: column;
-    align-items: flex-start;
+    gap: 10px;
+    padding: 15px 20px;
   }
 
   nav {
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  nav a {
+    font-size: 14px;
   }
 
   .banner {
-    height: 200px;
-    margin: 10px;
+    height: 180px;
   }
 
   .banner-text {
-    font-size: 1.6rem;
-    left: 15px;
-    bottom: 15px;
-  }
-
-  section h2 {
-    font-size: 1.5rem;
-  }
-
-  article img {
-    height: 150px;
+    font-size: 20px;
   }
 }
-</style>
