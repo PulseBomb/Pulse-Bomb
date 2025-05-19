@@ -5,90 +5,144 @@
   box-sizing: border-box;
 }
 
-body, html {
-  height: 100%;
+body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #111;
-  color: #eee;
-}
-
-/* الخلفية الثابتة العريضة */
-.hero {
-  position: relative;
-  height: 60vh;
   background: url('https://i.postimg.cc/ZYXJMh7h/20250519-230038.jpg') no-repeat center center fixed;
   background-size: cover;
-  display: flex;
-  align-items: flex-end;
-  padding-left: 150px;
-  padding-bottom: 20px;
+  color: #eee;
+  min-height: 100vh;
 }
 
 /* الشعار */
 header {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 10;
+  padding: 20px 40px;
+  background: rgba(10, 10, 10, 0.85);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #333;
 }
 
 .logo {
-  width: 120px;
-  height: auto;
-  filter: drop-shadow(0 0 5px #000);
+  height: 50px;
 }
 
-/* الشريط الجانبي - المربعات */
-.sidebar {
-  position: absolute;
-  bottom: 10px;
-  left: 20px;
+/* الحاوية الرئيسية */
+.container {
   display: flex;
+  min-height: calc(100vh - 92px); /* 92px header height + padding */
+}
+
+/* الشريط الجانبي */
+.sidebar {
+  background: rgba(20, 20, 20, 0.9);
+  width: 200px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
   gap: 15px;
 }
 
 .nav-btn {
-  background-color: rgba(0, 0, 0, 0.6);
-  color: #eee;
-  padding: 12px 20px;
-  border-radius: 8px;
+  background: #222;
+  color: #ccc;
+  padding: 12px 18px;
   text-decoration: none;
+  border-radius: 8px;
   font-weight: 600;
-  box-shadow: 0 0 8px transparent;
-  transition: all 0.3s ease;
-  user-select: none;
+  transition: background 0.3s, color 0.3s;
+  text-align: center;
 }
 
-.nav-btn:hover {
-  background-color: #1e90ff;
-  box-shadow: 0 0 12px #1e90ff;
-  transform: translateY(-4px);
+.nav-btn:hover, .nav-btn.active {
+  background: #1e90ff;
+  color: #fff;
+  box-shadow: 0 0 10px #1e90ff;
 }
 
-.nav-btn:active {
-  background-color: #005fbb;
-  box-shadow: 0 0 6px #005fbb;
-  transform: translateY(0);
+/* المحتوى الرئيسي */
+.main-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.6);
+  border-left: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .hero {
-    height: 40vh;
-    padding-left: 20px;
-    align-items: flex-start;
+/* كروت الأخبار */
+.news-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  background: rgba(30, 30, 30, 0.85);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(30, 144, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 25px #1e90ff;
+}
+
+.card h2 {
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+  color: #1e90ff;
+}
+
+.card p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #ddd;
+  margin-bottom: 15px;
+}
+
+.read-more {
+  color: #63b3ff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.read-more:hover {
+  color: #1e90ff;
+  text-decoration: underline;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
   }
+
   .sidebar {
-    position: static;
+    width: 100%;
+    flex-direction: row;
     justify-content: center;
-    margin-top: 10px;
+    padding: 15px 0;
+    gap: 10px;
+    border-bottom: 1px solid #333;
   }
-  header {
-    position: static;
-    text-align: center;
-    margin: 10px auto;
+
+  .nav-btn {
+    flex: 1;
+    padding: 10px 0;
+    font-size: 0.9rem;
   }
-  .logo {
-    width: 90px;
+
+  .main-content {
+    padding: 20px 15px;
+  }
+
+  .news-cards {
+    grid-template-columns: 1fr;
   }
 }
