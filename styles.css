@@ -1,0 +1,523 @@
+/* ----------------------------------
+   Global Styles - Mobile-First & Anime Style
+---------------------------------- */
+:root {
+  /* الألوان: مريحة ومناسبة للتباين */
+  --color-primary: #8e44ad; /* بنفسجي جذاب */
+  --color-secondary: #2ecc71; /* أخضر زمردي */
+  --color-accent: #e74c3c; /* أحمر نابض */
+  --color-background: #2c3e50; /* خلفية داكنة */
+  --color-surface: #34495e; /* سطح داكن */
+  --color-text: #ecf0f1; /* نص فاتح */
+  --color-light-gray: #bdc3c7; /* رمادي فاتح */
+
+  /* متغيرات RGB للشفافية */
+  --color-primary-rgb: 142, 68, 173;
+  --color-secondary-rgb: 46, 204, 113;
+  --color-accent-rgb: 231, 76, 60;
+  --color-background-rgb: 44, 62, 80;
+  --color-surface-rgb: 52, 73, 94;
+  --color-text-rgb: 236, 240, 241;
+
+  /* أحجام للهواتف الصغيرة */
+  --tube-width-base: 50px; /* أصغر لشاشات صغيرة */
+  --tube-height-base: 160px; /* ارتفاع مناسب */
+  --ball-size-base: 40px; /* كرات أصغر */
+  --gap-base: 0.6rem; /* مسافات صغيرة */
+  --border-radius: 10px; /* زوايا أقل حدة */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* إعادة ضبط الأنماط */
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: 'Cairo', sans-serif;
+  margin: 0;
+  padding: var(--gap-base);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent; /* إزالة تأثير النقر الافتراضي */
+}
+
+/* إزالة تأثيرات التوهج الثقيلة لتحسين الأداء */
+body::before,
+body::after,
+.game-container::before {
+  display: none; /* إزالة التوهج الخلفي للهواتف لتحسين الأداء */
+}
+
+/* تخطيط اللعبة الرئيسي */
+#game-container {
+  width: 100%;
+  max-width: 600px;
+  margin: var(--gap-base) auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-base);
+  position: relative;
+  flex-grow: 1;
+}
+
+/* ----------------------------------
+   Header Section - Mobile Optimized
+---------------------------------- */
+.game-header {
+  background: var(--color-surface);
+  border-radius: var(--border-radius);
+  padding: 0.8rem;
+  margin-bottom: 0.8rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.game-header h1 {
+  color: var(--color-primary);
+  font-size: 1.4rem;
+  margin: 0.4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-basis: 100%;
+  text-align: center;
+  justify-content: center;
+}
+.game-header h1 i {
+  color: var(--color-accent);
+  font-size: 1.1em;
+}
+
+.stats-container {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 0.6rem;
+}
+
+.stat-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 clamp(80px, 20%, 140px);
+  min-width: 0;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stat-item i {
+  color: var(--color-secondary);
+  margin-right: 0.4rem;
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+}
+
+.quest-btn,
+.settings-btn {
+  background: var(--color-primary);
+  color: var(--color-text);
+  border: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  box-shadow: var(--shadow-sm);
+  margin: 0.4rem 0.2rem;
+  min-width: 80px; /* حجم مناسب للنقر */
+  touch-action: manipulation; /* تحسين اللمس */
+}
+
+.quest-btn:hover,
+.settings-btn:hover {
+  background: #7b2e9d;
+  transform: translateY(-1px);
+}
+
+/* ----------------------------------
+   Tubes Container - Optimized for Touch
+---------------------------------- */
+#tubes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--tube-width-base), 1fr));
+  gap: var(--gap-base);
+  padding: var(--gap-base) 0.4rem;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  min-height: calc(var(--tube-height-base) + 1.5rem);
+}
+
+.tube {
+  width: var(--tube-width-base);
+  height: var(--tube-height-base);
+  background: rgba(var(--color-surface-rgb), 0.6);
+  border-radius: 0 0 calc(var(--tube-width-base) / 2) calc(var(--tube-width-base) / 2);
+  border: 1px solid rgba(var(--color-text-rgb), 0.2);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  padding: 0.4rem 0;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: var(--shadow-sm);
+  margin: 0 auto;
+  touch-action: manipulation;
+}
+
+.tube:hover:not(.selected-tube),
+.tube:active:not(.selected-tube) {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.tube.empty {
+  background: rgba(var(--color-background-rgb), 0.3);
+  border: 1px dashed rgba(var(--color-light-gray-rgb), 0.4);
+}
+
+.tube.selected-tube {
+  box-shadow: 0 0 0 3px var(--color-accent), var(--shadow-md);
+  transform: scale(1.03);
+}
+
+.tube.completed {
+  background: linear-gradient(to bottom, rgba(var(--color-secondary-rgb), 0.6) 80%, rgba(0, 0, 0, 0.2));
+  border-color: rgba(var(--color-secondary-rgb), 0.7);
+  box-shadow: 0 0 0 3px var(--color-secondary);
+}
+
+/* إزالة تأثير الوميض لتحسين الأداء */
+@keyframes tube-completed-shine {
+  0% { box-shadow: 0 0 0 3px var(--color-secondary); }
+  50% { box-shadow: 0 0 0 5px var(--color-secondary); }
+  100% { box-shadow: 0 0 0 3px var(--color-secondary); }
+}
+
+/* ----------------------------------
+   Balls Design - Mobile Optimized
+---------------------------------- */
+.ball {
+  width: var(--ball-size-base);
+  height: var(--ball-size-base);
+  border-radius: 50%;
+  margin-bottom: 2px;
+  box-shadow: inset 0 -1px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* تقليل تأثير التوهج للأداء */
+@keyframes pulse-glow {
+  0% { box-shadow: inset 0 -1px 4px rgba(0, 0, 0, 0.2); }
+  100% { box-shadow: inset 0 -1px 4px rgba(0, 0, 0, 0.2), 0 0 6px rgba(255, 255, 255, 0.2); }
+}
+
+/* ألوان الكرات */
+.ball[style*="red"] { background: radial-gradient(circle at 30% 30%, #ff8c8c, #e74c3c 70%) !important; }
+.ball[style*="green"] { background: radial-gradient(circle at 30% 30%, #61ed9c, #2ecc71 70%) !important; }
+.ball[style*="blue"] { background: radial-gradient(circle at 30% 30%, #7dc3f8, #3498db 70%) !important; }
+.ball[style*="yellow"] { background: radial-gradient(circle at 30% 30%, #fcec8c, #f1c40f 70%) !important; }
+.ball[style*="purple"] { background: radial-gradient(circle at 30% 30%, #c499e0, #9b59b6 70%) !important; }
+.ball[style*="orange"] { background: radial-gradient(circle at 30% 30%, #ffc07e, #f39c12 70%) !important; }
+.ball[style*="pink"] { background: radial-gradient(circle at 30% 30%, #ffacec, #fd79a8 70%) !important; }
+.ball[style*="brown"] { background: radial-gradient(circle at 30% 30%, #c39a7b, #8B4513 70%) !important; }
+.ball[style*="cyan"] { background: radial-gradient(circle at 30% 30%, #68f0eb, #1abc9c 70%) !important; }
+.ball[style*="lime"] { background: radial-gradient(circle at 30% 30%, #e2fa67, #c0d922 70%) !important; }
+
+.ball.moving {
+  position: absolute;
+  z-index: 20;
+  transition: transform 0.2s ease-out;
+}
+
+/* ----------------------------------
+   Controls Section - Optimized for Taps
+---------------------------------- */
+.control-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 600px;
+  padding: 0 0.4rem;
+}
+
+.control-panel button {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--border-radius);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: background 0.2s ease, transform 0.1s ease;
+  box-shadow: var(--shadow-sm);
+  touch-action: manipulation;
+}
+.control-panel button {
+  white-space: nowrap; /* يمنع انقسام النص */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.control-panel button:hover:not(:disabled),
+.control-panel button:active:not(:disabled) {
+  background: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.control-panel button:disabled {
+  background: #555;
+  color: #aaa;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ----------------------------------
+   Messages & Notifications
+---------------------------------- */
+#message {
+  text-align: center;
+  padding: 0.6rem 0.8rem;
+  margin: 0.8rem 0;
+  background: var(--color-surface);
+  border-radius: var(--border-radius);
+  width: calc(100% - 0.8rem);
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.error-message {
+  color: #ff3838;
+  background: rgba(255, 56, 56, 0.1);
+  border: 1px solid #ff3838;
+}
+
+.shake-error {
+  animation: shake 0.3s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 70% { transform: translateX(-2px); }
+  40%, 60% { transform: translateX(2px); }
+}
+
+.success-message {
+  color: #1abc9c;
+  background: rgba(26, 188, 156, 0.1);
+  border: 1px solid #1abc9c;
+}
+
+#loading-message {
+  padding: 15px 25px;
+  font-size: 0.9rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+}
+
+#loading-message.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#achievement-badge {
+  bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  gap: 6px;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+#achievement-badge.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ----------------------------------
+   Popups - Mobile Optimized
+---------------------------------- */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(var(--color-surface-rgb), 0.95);
+  border: 1px solid var(--color-primary);
+  width: 90%;
+  max-width: 400px;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.popup.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.popup h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.popup .close-btn {
+  top: 8px;
+  right: 8px;
+  font-size: 1.4rem;
+}
+
+.popup .close-btn:hover {
+  color: var(--color-accent);
+}
+
+/* ----------------------------------
+   Custom Scrollbar
+---------------------------------- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+.game-header {
+  /* استخدام الصورة كخلفية للهيدر فقط */
+  background-image: url('https://i.postimg.cc/zBCN0Mdp/IMG-20250529-004448.jpg'); /* رابط الصورة */
+  background-size: cover;
+  background-position: center 20%; /* تعديل لتركيز الصورة */
+  background-repeat: no-repeat;
+  border-radius: var(--border-radius);
+  padding: 1.2rem; /* زيادة البادينج */
+  margin: var(--gap-base) auto; /* توسيط الهيدر مع مسافة من الأعلى والأسفل */
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - var(--gap-base) * 2); /* عرض كامل مع هامش جانبي */
+  max-width: 700px; /* أقصى عرض ليكون مناسبًا للشاشات الكبيرة */
+  box-sizing: border-box;
+  border: 1px solid rgba(var(--color-primary-rgb), 0.4); /* حدود أكثر وضوحاً */
+  position: relative;
+  overflow: hidden;
+  min-height: 140px; /* ارتفاع أدنى أعلى للهيدر */
+  animation: header-fade-in 0.8s ease-out; /* تأثير دخول */
+}
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 6px;
+}
+
+/* ----------------------------------
+   Media Queries for Larger Screens
+---------------------------------- */
+@media (min-width: 768px) {
+  :root {
+    --tube-width-base: 55px;
+    --tube-height-base: 180px;
+    --ball-size-base: 45px;
+    --gap-base: 0.8rem;
+  }
+
+  body {
+    padding: 1rem;
+  }
+
+  .game-header {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .game-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .stats-container {
+    margin-top: 0;
+  }
+
+  .stat-item {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .quest-btn,
+  .settings-btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  #tubes-container {
+    gap: 0.8rem;
+    padding: 0.8rem;
+  }
+
+  .control-panel {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .popup {
+    padding: 1.2rem;
+    max-width: 450px;
+  }
+
+  .popup h2 {
+    font-size: 1.6rem;
+  }
+}
+
+/* تحسينات الوصول */
+button:focus-visible,
+.tube:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* تحسين الأداء */
+.tube,
+.ball,
+button,
+.popup {
+  will-change: transform; /* تقليل استخدام will-change */
+}

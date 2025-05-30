@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head> 
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ball Puzzle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* إضافة أنماط لضمان عدم تجاوز النصوص */
+    .stat-item {
+      white-space: nowrap; /* يمنع التفاف النص */
+      overflow: hidden;    /* يخفي أي نص يتجاوز الحاوية */
+      text-overflow: ellipsis; /* يضيف علامات الحذف (...) للنص المخفي */
+      max-width: 150px; /* يمكن تعديل هذا العرض حسب الحاجة */
+    }
+
+    /* أسلوب خاص للذهب */
+    #gold-display-container {
+      color: gold; /* لون ذهبي */
+      display: flex; /* لعرض الأيقونة والنص في سطر واحد */
+      align-items: center; /* لمحاذاة رأسية */
+    }
+
+    /* أنماط جديدة للوحة التحكم */
+    .top-controls-panel {
+      display: flex;
+      justify-content: center; /* توسيط العناصر */
+      gap: 15px; /* مسافة بين الأزرار */
+      margin-top: 10px; /* مسافة من البانر العلوي */
+      margin-bottom: 20px; /* مسافة من حاوية اللعبة */
+      flex-wrap: wrap; /* السماح بتجاوز العناصر للأسفل في الشاشات الصغيرة */
+    }
+
+    .top-controls-panel button {
+      padding: 10px 15px;
+      border-radius: 8px;
+      background-color: #4CAF50; /* لون أخضر جذاب */
+      color: white;
+      border: none;
+      font-size: 1em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .top-controls-panel button:hover {
+      background-color: #45a049;
+    }
+
+    .top-controls-panel button .cost-display {
+        font-weight: bold;
+        color: yellow; /* لون مميز للسعر */
+        font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-header">
+    <div class="stats-container">
+      <div class="stat-item" id="gold-display-container">
+        <span class="material-symbols-outlined">payments</span> <span data-lang-key="gold_label">الذهب:</span>
+        <span id="gold-display">0</span>
+      </div>
+    </div>
+    <h1 data-lang-key="game_title">Ball Puzzle <span class="material-symbols-outlined">sports_soccer</span></h1>
+    <div class="stats-container stats-right">
+      <div class="stat-item">
+        <span class="material-symbols-outlined">bar_chart</span> <span data-lang-key="level_label">المستوى:</span>
+        <span id="level-display">1</span>
+      </div>
+
+      <button class="quest-btn" id="quests-button" title="عرض المهام" data-lang-key="quests_button">
+        <span class="material-symbols-outlined">assignment</span> <span data-lang-key="quests_button">المهام</span>
+      </button>
+
+      <button class="settings-btn" id="settings-button" title="إعدادات اللعبة" data-lang-key="settings_button">
+        <span class="material-symbols-outlined">settings</span> <span data-lang-key="settings_button">الإعدادات</span>
+      </button>
+    </div>
+  </div>
+
+
+<div class="top-controls-panel">
+    <button id="undo-button" title="تراجع" data-lang-key="undo_button">
+        <span class="material-symbols-outlined">undo</span> <span data-lang-key="undo_button">تراجع</span>
+        <span class="cost-display">(<span id="undo-cost-display"></span>3)</span>
+    </button>
+    <button id="reset-button" title="إعادة" data-lang-key="reset_button">
+        <span class="material-symbols-outlined">restart_alt</span> <span data-lang-key="reset_button">إعادة</span>
+    </button>
+    <button id="hint-button" title="تلميح" data-lang-key="hint_button">
+        <span class="material-symbols-outlined">lightbulb</span> <span data-lang-key="hint_button">تلميح</span>
+        <span class="cost-display">(<span id="hint-cost-display"></span>)</span>
+    </button>
+    <button class="powerup-btn" id="buy-tube-button" title="أنبوب إضافي" data-lang-key="buy_tube_button">
+        <span class="material-symbols-outlined">science</span> <span data-lang-key="buy_tube_button">أنبوب</span>
+        <span class="cost-display">(<span id="buy-tube-cost-display"></span>)</span>
+    </button>
+</div>
+
+
+  <div id="achievement-badge" class="achievement-badge"></div>
+
+  <div id="quests-popup" class="popup hidden">
+    <button id="close-quests-button" class="close-btn" title="إغلاق المهام"><span class="material-symbols-outlined">close</span></button>
+    <h2 data-lang-key="your_quests_title"><span class="material-symbols-outlined">assignment</span> مهامك</h2>
+    <div class="quests-section">
+      <h3 data-lang-key="daily_quests_title"><span class="material-symbols-outlined">calendar_today</span> المهام اليومية</h3>
+      <div id="daily-quests" class="quests-list"></div>
+    </div>
+    <div class="quests-section">
+      <h3 data-lang-key="weekly_quests_title"><span class="material-symbols-outlined">calendar_month</span> المهام الأسبوعية</h3>
+      <div id="weekly-quests" class="quests-list"></div>
+    </div>
+  </div>
+<a href="https://t.me/Katana_3015" target="_blank" title="Developer" style="
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: #0088cc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  z-index: 1000;
+  cursor: pointer;
+">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" style="width: 24px; height: 24px;">
+</a>
+  <div id="settings-popup" class="popup hidden">
+    <button id="close-settings-button" class="close-btn" title="إغلاق الإعدادات"><span class="material-symbols-outlined">close</span></button>
+    <h2 data-lang-key="settings_title"><span class="material-symbols-outlined">settings</span> settings</h2>
+    <div class="setting-item">
+      <label for="music-volume-slider" data-lang-key="music_volume_label">مستوى صوت الموسيقى:</label>
+      <input type="range" id="music-volume-slider" min="0" max="100">
+    </div>
+    <div class="setting-item">
+      <label for="sfx-volume-slider" data-lang-key="sfx_volume_label">مستوى صوت المؤثرات:</label>
+      <input type="range" id="sfx-volume-slider" min="0" max="100">
+    </div>
+    <div class="setting-item">
+      <button id="music-toggle-button" class="toggle-btn" title="تبديل تشغيل/إيقاف الموسيقى"><span class="material-symbols-outlined">volume_up</span> <span data-lang-key="toggle_music_on">تشغيل الموسيقى</span></button>
+    </div>
+    <div class="setting-item">
+      <button id="sfx-toggle-button" class="toggle-btn" title="تبديل تشغيل/إيقاف المؤثرات الصوتية"><span class="material-symbols-outlined">volume_up</span> <span data-lang-key="toggle_sfx_on">تشغيل المؤثرات الصوتية</span></button>
+    </div>
+    <div class="setting-item">
+        <label data-lang-key="language_label">اللغة:</label>
+        <button id="language-toggle-button" class="toggle-btn">
+            <span class="material-symbols-outlined">language</span> <span data-lang-key="current_language">العربية</span>
+        </button>
+    </div>
+    <div class="setting-item">
+      <span id="player-id" data-lang-key="player_id_label">معرّفك: N/A</span>
+    </div>
+  </div>
+
+  <div id="loading-message" class="loading-message hidden" data-lang-key="loading_message">جارٍ التحميل...</div>
+
+  <div id="game-container">
+    <div id="message" class="game-message" data-lang-key="initial_message">رتّب الكرات حسب اللون</div>
+    <div id="tubes-container"></div>
+  </div>
+
+  <audio id="backgroundMusic" src="assets/sounds/background_music.mp3" preload="auto" loop></audio>
+
+  <script src="script.js" defer type="module"></script>
+
+</body>
+</html>
